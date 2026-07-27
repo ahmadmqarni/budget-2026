@@ -719,6 +719,19 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
           <p>Tap the <strong>＋</strong> button to log your first August receipt.</p>
         </div>
       </div>
+      </div>
+      <div class="two-col" style="margin-top:20px">
+        <div class="section-card"><div class="section-title">Spending by Category — Live</div><div id="aug-cats"></div></div>
+        <div class="section-card">
+          <div class="section-title">Extra Spending — Not Deducted from Budget</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <span class="extra-badge">⚠️ Isolated</span>
+            <span class="extra-total-val" id="aug-extra-total-val">SAR 0.00</span>
+          </div>
+          <div id="aug-extra-breakdown"></div>
+        </div>
+      </div>
+      <div class="insights-card" id="aug-insights-card" style="margin-top:20px;margin-bottom:20px"></div>
     </div>
   </div>
   <div id="panel-sep" class="month-panel"><div class="empty-state"><div class="es-icon">📭</div><h3>September — Not started</h3><p></p></div></div>
@@ -1149,7 +1162,7 @@ const ALL_MONTHS=[
   {key:'may',label:'May',spent:6780.44,extra:2612.88,active:true,cycle:'Apr 27–May 27',days:31,avgDay:218.72,pct:96.9,overBudget:false},
   {key:'jun',label:'Jun',spent:6764.36,extra:5634.99,active:true,cycle:'May 24–Jun 27',days:35,avgDay:193.27,pct:96.6},
   {key:'jul',label:'Jul',spent:6496.84,extra:2118.41,active:true,txns:null},
-  {key:'aug',label:'Aug',spent:0,extra:0,active:false},
+  {key:'aug',label:'Aug',spent:266.45,extra:600.0,active:true,cycle:'Jul 28–Aug 27',days:31,avgDay:266.45,pct:3.8,overBudget:false,partial:true},
   {key:'sep',label:'Sep',spent:0,extra:0,active:false},
   {key:'oct',label:'Oct',spent:0,extra:0,active:false},
   {key:'nov',label:'Nov',spent:0,extra:0,active:false},
@@ -3040,6 +3053,126 @@ async function copyExport() {
     }
   };
 })();
+
+
+// ── AUG DYNAMIC INSIGHTS + CATEGORIES ────────────────────
+function renderLiveExtras() {
+  var extras = localData.extra || [];
+  var extraTotal = extras.reduce(function(s,e){ return s+e.amount; }, 0);
+  var etv = document.getElementById("aug-extra-total-val");
+  if(etv) etv.textContent = "SAR " + fmt(extraTotal);
+  var eb = document.getElementById("aug-extra-breakdown");
+  if(eb) {
+    if(extras.length === 0) {
+      eb.innerHTML = "<div style=\"color:var(--text-muted);font-size:12px;padding:8px 0\">No extra spending logged yet.</div>";
+    } else {
+      eb.innerHTML = extras.map(function(e) {
+        var d = e.date ? new Date(e.date + "T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"short"}) : "—";
+        return "<div class=\"extra-row\"><span class=\"er-name\">⚠️ " + e.merchant + " · " + (e.note||"") + " · " + d + "</span><span class=\"er-amount\">" + fmt(e.amount) + "</span></div>";
+      }).join("");
+    }
+  }
+}
+
+function renderLiveCategories() {
+  var txns = localData.transactions || [];
+  if(txns.length === 0) {
+    var c = document.getElementById("aug-cats");
+    if(c) c.innerHTML = "<div style=\"color:var(--text-muted);font-size:12px;padding:8px 0\">No transactions yet.</div>";
+    return;
+  }
+  var tots = {};
+  txns.forEach(function(t){ tots[t.category] = (tots[t.category]||0) + t.amount; });
+  var grand = Object.values(tots).reduce(function(a,b){ return a+b; }, 0);
+  var sorted = Object.entries(tots).sort(function(a,b){ return b[1]-a[1]; });
+  var catsEl = document.getElementById("aug-cats");
+  if(!catsEl) return;
+  catsEl.innerHTML = sorted.map(function(entry) {
+    var cat = entry[0]; var amt = entry[1];
+    var col = COL[cat]||"#8b949e";
+    var bg  = BG[cat]||"rgba(139,148,158,0.12)";
+    var ico = ICO[cat]||"📦";
+    return "<div class=\"cat-row\">" +
+      "<div class=\"cat-icon-wrap\" style=\"background:" + bg + "\">" + ico + "</div>" +
+      "<div class=\"cat-info\">" +
+        "<div class=\"cat-name\">" + cat + "</div>" +
+        "<div class=\"cat-bar-wrap\"><div class=\"cat-bar\" style=\"width:" + (amt/grand*100).toFixed(1) + "%;background:" + col + "\"></div></div>" +
+      "</div>" +
+      "<div class=\"cat-right\">" +
+        "<div class=\"cat-amount\">" + fmt(amt) + "</div>" +
+        "<div class=\"cat-pct\">" + (amt/7000*100).toFixed(1) + "%</div>" +
+      "</div>" +
+    "</div>";
+  }).join("");
+}
+
+function renderLiveInsights() {
+  var txns  = localData.transactions || [];
+  var extras = localData.extra || [];
+  var ins = document.getElementById("aug-insights-card");
+  if(!ins) return;
+  if(txns.length === 0) { ins.innerHTML = ""; return; }
+
+  var total = txns.reduce(function(s,t){ return s+t.amount; }, 0);
+  var extraTotal = extras.reduce(function(s,e){ return s+e.amount; }, 0);
+  var rem   = 7000 - total;
+  var tots  = {};
+  txns.forEach(function(t){ tots[t.category]=(tots[t.category]||0)+t.amount; });
+  var topEntry = Object.entries(tots).sort(function(a,b){ return b[1]-a[1]; })[0];
+  var food = tots["Food Delivery"]||0;
+  var cafe = tots["Café & Drinks"]||0;
+  var groc = tots["Groceries"]||0;
+
+  ins.innerHTML =
+    "<div class=\"insights-title\">📊 August 2026 — Live Snapshot (Day 1)</div>" +
+    "<div class=\"insights-grid\">" +
+      "<div class=\"insight-block good\">" +
+        "<div class=\"ib-label\">📍 Cycle Status</div>" +
+        "<div class=\"ib-val\">Day 1 · " + fmt(total) + " SAR</div>" +
+        "<div class=\"ib-desc\">Only <strong>" + fmt(total) + " SAR</strong> spent so far — <strong>3.8%</strong> of the 7,000 SAR budget. " +
+        "With " + fmt(rem) + " SAR remaining across 30 days, the implied daily budget is <strong>SAR " + fmt(rem/30) + "</strong>.</div>" +
+      "</div>" +
+      "<div class=\"insight-block info\">" +
+        "<div class=\"ib-label\">📌 Top Category So Far</div>" +
+        "<div class=\"ib-val\">" + topEntry[0] + "</div>" +
+        "<div class=\"ib-desc\">Leading category at <strong>" + fmt(topEntry[1]) + " SAR</strong>. " +
+        "Groceries (SAR " + fmt(groc) + ") + Delivery (SAR " + fmt(food) + ") account for most of today\'s spend.</div>" +
+      "</div>" +
+      "<div class=\"insight-block warn\">" +
+        "<div class=\"ib-label\">🎯 Targets to Watch</div>" +
+        "<div class=\"ib-val\">Meal Sub + Café</div>" +
+        "<div class=\"ib-desc\">" +
+        "Last month (July) closed at 93% with high café spend. " +
+        "For August: activate meal subscription early, cap café at <strong>400 SAR</strong>, keep delivery under <strong>500 SAR</strong>.</div>" +
+      "</div>" +
+      "<div class=\"insight-block purple\">" +
+        "<div class=\"ib-label\">💜 Extra So Far</div>" +
+        "<div class=\"ib-val\">SAR " + fmt(extraTotal) + "</div>" +
+        "<div class=\"ib-desc\">Mom gift (600 SAR) correctly isolated. " +
+        "Keep tracking extra items separately as the cycle progresses — " +
+        "export weekly for full Claude analysis.</div>" +
+      "</div>" +
+    "</div>" +
+    "<div class=\"insights-summary\">" +
+      "<strong>August — Week 1 Snapshot:</strong> Very early in the cycle with just 7 transactions. " +
+      "Groceries dominate (SAR " + fmt(groc) + ") plus one HungerStation order (SAR " + fmt(food) + "). " +
+      "No meal subscription active yet — based on the 2026 pattern, activating Fresh House early will be the " +
+      "single biggest lever for keeping this month under budget. " +
+      "Note: all 7 transactions are dated Jul 27 (last day of July cycle) — technically borderline, " +
+      "but tracked here as the start of August spending. " +
+      "Extra spending (SAR " + fmt(extraTotal) + " — Mom gift) correctly isolated." +
+    "</div>";
+}
+
+// Extend renderLive to also call categories + insights + extras
+var _origRenderLive = renderLive;
+renderLive = function() {
+  _origRenderLive();
+  renderLiveCategories();
+  renderLiveExtras();
+  renderLiveInsights();
+};
+
 </script>
 
 </body>
