@@ -390,8 +390,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <button class="month-tab has-data" onclick="showMonth('apr',this)">Apr</button>
     <button class="month-tab has-data" onclick="showMonth('may',this)">May</button>
     <button class="month-tab has-data" onclick="showMonth('jun',this)">Jun</button>
-    <button class="month-tab has-data active" onclick="showMonth('jul',this)">Jul</button>
-    <button class="month-tab has-data" onclick="showMonth('aug',this)">Aug ●</button>
+    <button class="month-tab has-data" onclick="showMonth('jul',this)">Jul</button>
+    <button class="month-tab has-data active" onclick="showMonth('aug',this)">Aug ●</button>
     <button class="month-tab" onclick="showMonth('sep',this)">Sep</button>
     <button class="month-tab" onclick="showMonth('oct',this)">Oct</button>
     <button class="month-tab" onclick="showMonth('nov',this)">Nov</button>
@@ -685,7 +685,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     </div>
     <div class="insights-card" id="jun-insights"></div>
   </div>
-  <div id="panel-aug" class="month-panel">
+  <div id="panel-aug" class="month-panel active">
     <div id="aug-setup-required" class="setup-required" style="display:none">
       <p>🔐 Connect your GitHub Gist to log and sync live transactions.</p>
       <button class="modal-btn primary" style="max-width:200px;margin:0 auto" onclick="document.getElementById('setupModal').classList.remove('hidden')">Connect Gist</button>
@@ -740,7 +740,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   <div id="panel-dec" class="month-panel"><div class="empty-state"><div class="es-icon">📭</div><h3>December — Not started</h3><p></p></div></div>
 
   <!-- JULY -->
-  <div id="panel-jul" class="month-panel active">
+  <div id="panel-jul" class="month-panel">
     <div class="overview-card">
       <div class="overview-top">
         <div class="overview-left">
@@ -2778,7 +2778,7 @@ function buildMayInsights() {
     <div class="export-box" id="exportBox"></div>
     <div class="modal-actions">
       <button class="modal-btn secondary" onclick="document.getElementById('exportModal').classList.add('hidden')">Close</button>
-      <button class="modal-btn primary" onclick="copyExport()">📋 Copy to Clipboard</button>
+      <button class="modal-btn primary" onclick="copyExport(this)">📋 Copy to Clipboard</button>
     </div>
   </div>
 </div>
@@ -3027,15 +3027,46 @@ function openExport() {
   document.getElementById("exportModal").classList.remove("hidden");
 }
 
-async function copyExport() {
-  try {
-    await navigator.clipboard.writeText(document.getElementById("exportBox").textContent);
-    var btn = event.target;
-    var orig = btn.textContent;
+function copyExport(btn) {
+  var text = document.getElementById("exportBox").textContent;
+  var success = false;
+
+  // Method 1: Modern clipboard API (works on HTTPS desktop + modern mobile)
+  if(navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function() {
+      btn.textContent = "✅ Copied!";
+      setTimeout(function(){ btn.textContent = "📋 Copy to Clipboard"; }, 2500);
+    }).catch(function() {
+      fallbackCopy(text, btn);
+    });
+    return;
+  }
+  // Method 2: execCommand fallback (older browsers + iOS Safari)
+  fallbackCopy(text, btn);
+}
+
+function fallbackCopy(text, btn) {
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.top = "0";
+  ta.style.left = "0";
+  ta.style.opacity = "0";
+  ta.style.fontSize = "16px"; // prevents iOS zoom
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  // iOS needs this extra step
+  ta.setSelectionRange(0, ta.value.length);
+  var ok = false;
+  try { ok = document.execCommand("copy"); } catch(e) {}
+  document.body.removeChild(ta);
+  if(ok) {
     btn.textContent = "✅ Copied!";
-    setTimeout(function(){ btn.textContent = orig; }, 2000);
-  } catch(e) {
-    alert("Copy failed — please select all text in the box and copy manually");
+    setTimeout(function(){ btn.textContent = "📋 Copy to Clipboard"; }, 2500);
+  } else {
+    // Last resort: show the text in a prompt so user can copy manually
+    window.prompt("Copy this text (Ctrl+A then Ctrl+C / Cmd+A then Cmd+C):", text);
   }
 }
 
@@ -3053,6 +3084,15 @@ async function copyExport() {
     }
   };
 })();
+
+// Auto-sync Aug on page load since it is the default tab
+window.addEventListener("load", function() {
+  if(gistToken) {
+    syncNow();
+  } else {
+    setSyncStatus("yellow", "Not connected — click ⚙️ Settings");
+  }
+});
 
 
 // ── AUG DYNAMIC INSIGHTS + CATEGORIES ────────────────────
