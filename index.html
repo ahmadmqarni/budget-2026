@@ -181,7 +181,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .ov-stat-card .osc-label{font-size:11px;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);}
 .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:20px;}
 .chart-title{font-size:12px;text-transform:uppercase;letter-spacing:0.9px;color:var(--text-muted);font-weight:600;margin-bottom:18px;}
-.bar-chart-wrap{overflow-x:auto;}
+.bar-chart-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
 .bar-chart-wrap svg{display:block;min-width:600px;}
 .month-compare-table{width:100%;border-collapse:collapse;}
 .month-compare-table th,.month-compare-table td{padding:10px 14px;text-align:left;font-size:12px;border-bottom:1px solid var(--surface2);}
@@ -351,6 +351,108 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   .modal{padding:18px 14px;}
   .sync-bar{flex-direction:column;gap:8px;align-items:flex-start;}
   .live-stats{grid-template-columns:1fr 1fr;}
+}
+
+
+/* ── DONUT & STAT CARD CONSISTENCY FIXES ─────────────────────── */
+.donut-card {
+  min-width: 0;
+  overflow: hidden;
+}
+.donut-wrap {
+  width: 86px;
+  height: 86px;
+  margin: 0 auto 12px;
+  flex-shrink: 0;
+}
+.donut-wrap svg {
+  width: 86px;
+  height: 86px;
+  display: block;
+}
+.donut-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 4px;
+}
+.donut-val {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 78px;
+  text-align: center;
+}
+.donut-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.donut-sub {
+  font-size: 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Overview stat cards — consistent sizing */
+.ov-stat-card {
+  min-width: 0;
+  overflow: hidden;
+  padding: 16px 12px;
+}
+.ov-stat-card .osc-val {
+  font-size: clamp(16px, 3.5vw, 22px);
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.ov-stat-card .osc-label {
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Chart card — ensure consistent padding */
+.chart-card {
+  padding: 18px;
+  overflow: hidden;
+}
+
+/* Ensure donuts grid cells don't stretch */
+.donuts-grid {
+  align-items: start;
+}
+
+@media(max-width:480px) {
+  .donut-wrap { width: 76px; height: 76px; }
+  .donut-wrap svg { width: 76px; height: 76px; }
+  .donut-val { font-size: 11px; max-width: 68px; }
+  .ov-stat-card { padding: 12px 8px; }
+  .ov-stat-card .osc-val { font-size: clamp(14px, 4vw, 18px); }
+  .chart-card { padding: 14px 10px; }
 }
 
 </style>
@@ -1025,7 +1127,7 @@ function buildDonuts(){
   const r=36,circ=2*Math.PI*r;
   const ds=[
     {label:'Budget Used',val:pct.toFixed(1)+'%',sub:fmt(total)+' SAR',color:'#f87171',pct:Math.min(pct,100)},
-    {label:'Remaining',val:'SAR '+fmt(rem),sub:'of 7,000',color:'#34d399',pct:rem/BUDGET*100},
+    {label:'Remaining',val:fmt(rem),sub:'SAR remaining',color:'#34d399',pct:rem/BUDGET*100},
     {label:'Avg / Day',val:fmt(avg),sub:'SAR per day',color:'#fbbf24',pct:Math.min(avg/233*100,100)},
     {label:'Transactions',val:julTransactions.length,sub:'core entries',color:'#4f8ef7',pct:Math.min(julTransactions.length/120*100,100)},
   ];
