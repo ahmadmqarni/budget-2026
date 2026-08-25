@@ -309,8 +309,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .sync-btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;}
 .fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:50%;color:#fff;font-size:26px;cursor:pointer;box-shadow:0 4px 20px rgba(79,142,247,0.4);z-index:999;transition:transform 0.2s,box-shadow 0.2s;display:flex;align-items:center;justify-content:center;}
 .fab:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(79,142,247,0.5);}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px);}
-.modal-overlay.hidden{display:none;}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.75);z-index:8000;display:none;align-items:center;justify-content:center;padding:16px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);}
+.modal-overlay.visible{display:flex !important;}
 .modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow);}
 .modal h3{font-size:16px;font-weight:700;margin-bottom:4px;}
 .modal .modal-sub{font-size:12px;color:var(--text-muted);margin-bottom:20px;}
@@ -790,7 +790,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   <div id="panel-aug" class="month-panel active">
     <div id="aug-setup-required" class="setup-required" style="display:none">
       <p>🔐 Connect your GitHub Gist to log and sync live transactions.</p>
-      <button class="modal-btn primary" style="max-width:200px;margin:0 auto" onclick="document.getElementById('setupModal').classList.remove('hidden')">Connect Gist</button>
+      <button class="modal-btn primary" style="max-width:200px;margin:0 auto" onclick="document.getElementById('setupModal').classList.remove('visible')">Connect Gist</button>
     </div>
     <div id="aug-live-content">
       <div class="sync-bar">
@@ -801,7 +801,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
         <div class="sync-actions">
           <button class="sync-btn" onclick="syncNow()">🔄 Sync</button>
           <button class="sync-btn" onclick="openExport()">📤 Export for Claude</button>
-          <button class="sync-btn" onclick="document.getElementById('setupModal').classList.remove('hidden')">⚙️ Settings</button>
+          <button class="sync-btn" onclick="document.getElementById('setupModal').classList.remove('visible')">⚙️ Settings</button>
         </div>
       </div>
       <div class="live-stats" id="aug-live-stats">
@@ -2794,7 +2794,7 @@ function buildMayInsights() {
 </script>
 
 <!-- SETUP MODAL -->
-<div class="modal-overlay hidden" id="setupModal">
+<div class="modal-overlay" id="setupModal">
   <div class="modal">
     <h3>⚙️ Connect to GitHub Gist</h3>
     <p class="modal-sub">Your token is stored only in this browser — never in the HTML file.</p>
@@ -2814,7 +2814,7 @@ function buildMayInsights() {
 </div>
 
 <!-- LOG RECEIPT MODAL -->
-<div class="modal-overlay hidden" id="logModal">
+<div class="modal-overlay" id="logModal">
   <div class="modal">
     <h3>➕ Log Transaction</h3>
     <p class="modal-sub">New entry will sync to your Gist immediately.</p>
@@ -2873,20 +2873,20 @@ function buildMayInsights() {
 </div>
 
 <!-- EXPORT MODAL -->
-<div class="modal-overlay hidden" id="exportModal">
+<div class="modal-overlay" id="exportModal">
   <div class="modal">
     <h3>📤 Export for Claude</h3>
     <p class="modal-sub">Copy this JSON and paste it to Claude for analysis.</p>
     <div class="export-box" id="exportBox"></div>
     <div class="modal-actions">
-      <button class="modal-btn secondary" onclick="document.getElementById('exportModal').classList.add('hidden')">Close</button>
+      <button class="modal-btn secondary" onclick="document.getElementById('exportModal').classList.remove('visible')">Close</button>
       <button class="modal-btn primary" onclick="copyExport(this)">📋 Copy to Clipboard</button>
     </div>
   </div>
 </div>
 
 <!-- FAB -->
-<button class="fab" onclick="openLog()" title="Log new transaction">＋</button>
+<button class="fab" onclick="try{openLog();}catch(e){alert('Error: '+e.message);}" title="Log new transaction">＋</button>
 
 <script>
 // ── GIST LIVE SYSTEM ──────────────────────────────────────
@@ -2897,7 +2897,7 @@ let localData = {transactions:[], extra:[]};
 
 // ── SETUP MODAL ───────────────────────────────────────────
 function closeSetup() {
-  document.getElementById("setupModal").classList.add("hidden");
+  document.getElementById("setupModal").classList.remove("visible");
 }
 
 async function saveSetup() {
@@ -3038,24 +3038,35 @@ function renderLive() {
 // ── LOG FORM ──────────────────────────────────────────────
 function openLog() {
   if(!gistToken) {
-    document.getElementById("setupModal").classList.remove("hidden");
-    document.getElementById("setupToken").focus();
+    var sm = document.getElementById("setupModal");
+    if(sm){ sm.classList.add("visible"); }
+    var st = document.getElementById("setupToken");
+    if(st){ setTimeout(function(){ st.focus(); }, 100); }
     return;
   }
   var today = new Date().toISOString().split("T")[0];
-  document.getElementById("logDate").value = today;
-  document.getElementById("logAmount").value = "";
-  document.getElementById("logMerchant").value = "";
-  document.getElementById("logNote").value = "";
-  document.getElementById("logIsExtra").checked = false;
-  document.getElementById("logCategory").value = "Café & Drinks";
+  var fields = ["logDate","logAmount","logMerchant","logNote"];
+  fields.forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.value = id === "logDate" ? today : "";
+  });
+  var isExtra = document.getElementById("logIsExtra");
+  if(isExtra) isExtra.checked = false;
+  var cat = document.getElementById("logCategory");
+  if(cat) cat.value = "Café & Drinks";
   updateTypeLabel();
-  document.getElementById("logModal").classList.remove("hidden");
-  setTimeout(function(){ document.getElementById("logMerchant").focus(); }, 150);
+  var lm = document.getElementById("logModal");
+  if(lm){
+    lm.classList.add("visible");
+    setTimeout(function(){
+      var m = document.getElementById("logMerchant");
+      if(m) m.focus();
+    }, 200);
+  }
 }
 
 function closeLog() {
-  document.getElementById("logModal").classList.add("hidden");
+  document.getElementById("logModal").classList.remove("visible");
 }
 
 function updateTypeLabel() {
@@ -3126,7 +3137,7 @@ function openExport() {
     exported_at: new Date().toISOString()
   };
   document.getElementById("exportBox").textContent = JSON.stringify(exportObj, null, 2);
-  document.getElementById("exportModal").classList.remove("hidden");
+  document.getElementById("exportModal").classList.add("visible");
 }
 
 function copyExport(btn) {
