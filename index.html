@@ -1264,7 +1264,7 @@ const ALL_MONTHS=[
   {key:'may',label:'May',spent:6780.44,extra:2612.88,active:true,cycle:'Apr 27–May 27',days:31,avgDay:218.72,pct:96.9,overBudget:false},
   {key:'jun',label:'Jun',spent:6764.36,extra:5634.99,active:true,cycle:'May 24–Jun 27',days:35,avgDay:193.27,pct:96.6},
   {key:'jul',label:'Jul',spent:6496.84,extra:2118.41,active:true,txns:null},
-  {key:'aug',label:'Aug',spent:3046.91,extra:927.9,active:true,cycle:'Jul 27–Aug 26',days:31,avgDay:380.86,pct:43.5,overBudget:false,partial:true},
+  {key:'aug',label:'Aug',spent:5948.96,extra:4685.3,active:true,cycle:'Jul 27–Aug 26',days:31,avgDay:205.14,pct:85.0,overBudget:false,partial:false},
   {key:'sep',label:'Sep',spent:0,extra:0,active:false},
   {key:'oct',label:'Oct',spent:0,extra:0,active:false},
   {key:'nov',label:'Nov',spent:0,extra:0,active:false},
@@ -3249,6 +3249,96 @@ function renderLiveCategories() {
 }
 
 function renderLiveInsights() {
+  var txns   = localData.transactions || [];
+  var extras = localData.extra || [];
+  var ins    = document.getElementById("aug-insights-card");
+  if(!ins) return;
+  if(txns.length === 0) { ins.innerHTML = ""; return; }
+
+  var total      = txns.reduce(function(s,t){ return s+t.amount; }, 0);
+  var extraTotal = extras.reduce(function(s,e){ return s+e.amount; }, 0);
+  var rem        = 7000 - total;
+
+  var cycleStart  = new Date("2026-07-27");
+  var today       = new Date();
+  var daysElapsed = Math.max(1, Math.round((today - cycleStart) / 86400000));
+  var daysLeft    = Math.max(0, 31 - daysElapsed);
+  var avgPerDay   = total / daysElapsed;
+  var dailyNeeded = daysLeft > 0 ? rem / daysLeft : 0;
+
+  var tots = {};
+  txns.forEach(function(t){ tots[t.category]=(tots[t.category]||0)+t.amount; });
+  var sorted   = Object.entries(tots).sort(function(a,b){ return b[1]-a[1]; });
+  var topCat   = sorted[0];
+
+  var pct        = (total / 7000 * 100).toFixed(1);
+  var isFinal    = daysLeft <= 2;
+  var trackColor = total <= 7000 ? "var(--green)" : "var(--red)";
+  var statusWord = total <= 7000 ? "✅ Under Budget" : "🚨 Over Budget";
+
+  var food  = tots["Food Delivery"]   || 0;
+  var cafe  = tots["Café & Drinks"]   || 0;
+  var groc  = tots["Groceries"]       || 0;
+  var meal  = tots["Meal Subscription"]|| 0;
+  var utils = tots["Utilities"]       || 0;
+  var subs  = tots["Subscriptions"]   || 0;
+  var trans = tots["Transport"]       || 0;
+  var fuel  = tots["Fuel"]            || 0;
+
+  ins.innerHTML =
+    "<div class=\"insights-title\">📊 August 2026 — " + (isFinal ? "Final Cycle Analysis" : "Live Insights · Day " + daysElapsed + " of 31") + "</div>" +
+    "<div class=\"insights-grid\">" +
+
+      "<div class=\"insight-block good\">" +
+        "<div class=\"ib-label\">" + (isFinal ? "🏁 Final Result" : "📍 Budget Pace") + "</div>" +
+        "<div class=\"ib-val\" style=\"color:" + trackColor + "\">" + statusWord + "</div>" +
+        "<div class=\"ib-desc\">" +
+          "Closed at <strong>" + fmt(total) + " SAR (" + pct + "%)</strong> — " +
+          "<strong>" + fmt(rem) + " SAR</strong> remaining. Avg/day: <strong>" + fmt(avgPerDay) + " SAR</strong>. " +
+          "4th consecutive month under the 7,000 SAR budget. " +
+          (isFinal ? "Excellent discipline given the high extra spending month." : "") +
+        "</div>" +
+      "</div>" +
+
+      "<div class=\"insight-block warn\">" +
+        "<div class=\"ib-label\">⚠️ Meal Sub Activated Too Late</div>" +
+        "<div class=\"ib-val\">Day 20 of 31</div>" +
+        "<div class=\"ib-desc\">" +
+          "Fresh House activated Aug 16 (day 20). Without it for 20 days, food delivery ran to <strong>" + fmt(food) + " SAR</strong>. " +
+          "If activated on day 1, estimated savings: ~500–600 SAR. " +
+          "<strong>September: activate meal sub on Day 1.</strong>" +
+        "</div>" +
+      "</div>" +
+
+      "<div class=\"insight-block info\">" +
+        "<div class=\"ib-label\">✈️ Trip Effect (Aug 7–15)</div>" +
+        "<div class=\"ib-val\">Spending Dropped</div>" +
+        "<div class=\"ib-desc\">" +
+          "Trip abroad (Aug 7–15) paradoxically helped the budget — daily core spending almost stopped. " +
+          "Airport dinner (78 SAR) and return taxi (78 SAR) logged but the 8-day absence kept variable spending low. " +
+        "</div>" +
+      "</div>" +
+
+      "<div class=\"insight-block purple\">" +
+        "<div class=\"ib-label\">💜 Extra: " + fmt(extraTotal) + " SAR</div>" +
+        "<div class=\"ib-val\">Highest Month</div>" +
+        "<div class=\"ib-desc\">" +
+          "NIPT screening (825 SAR) + AC repair (550 SAR) + family support (550 SAR) + Duolingo (300 SAR) + earphones (280 SAR). " +
+          "Mostly non-recurring. All correctly isolated. " +
+        "</div>" +
+      "</div>" +
+
+    "</div>" +
+    "<div class=\"insights-summary\">" +
+      "<strong>August Final Summary:</strong> Core budget closed at <strong>" + pct + "%</strong> (5,948.96 SAR) — the 4th consecutive under-budget month and 2nd best of the year after April (79.3%). " +
+      "Top category: Groceries (" + fmt(groc) + " SAR) followed by Food Delivery (" + fmt(food) + " SAR). " +
+      "The meal subscription (Fresh House + Githaa wife sub = " + fmt(meal + 327.25) + " SAR) was activated on Day 20 — too late to meaningfully reduce delivery spend. " +
+      "Transport (" + fmt(trans) + " SAR) was elevated by airport taxis. " +
+      "Extra spending hit a record <strong>4,685 SAR</strong> — driven by a medical test (NIPT 825 SAR), AC repair (550 SAR), and multiple family support transfers — " +
+      "all legitimate and correctly isolated from the core budget. " +
+      "<strong>For September:</strong> activate meal sub on Day 1, cap café at 350 SAR, budget explicitly for Uber rides." +
+    "</div>";
+}
   var txns   = localData.transactions || [];
   var extras = localData.extra || [];
   var ins    = document.getElementById("aug-insights-card");
