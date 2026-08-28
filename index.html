@@ -494,7 +494,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <button class="month-tab has-data" onclick="showMonth('jun',this)">Jun</button>
     <button class="month-tab has-data" onclick="showMonth('jul',this)">Jul</button>
     <button class="month-tab has-data active" onclick="showMonth('aug',this)">Aug ●</button>
-    <button class="month-tab" onclick="showMonth('sep',this)">Sep</button>
+    <button class="month-tab has-data" onclick="showMonth('sep',this)">Sep</button>
     <button class="month-tab" onclick="showMonth('oct',this)">Oct</button>
     <button class="month-tab" onclick="showMonth('nov',this)">Nov</button>
     <button class="month-tab" onclick="showMonth('dec',this)">Dec</button>
@@ -836,7 +836,53 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
       <div class="insights-card" id="aug-insights-card" style="margin-top:20px;margin-bottom:20px"></div>
     </div>
   </div>
-  <div id="panel-sep" class="month-panel"><div class="empty-state"><div class="es-icon">📭</div><h3>September — Not started</h3><p></p></div></div>
+  <div id="panel-sep" class="month-panel">
+    <div class="overview-card">
+      <div class="overview-top">
+        <div class="overview-left">
+          <div class="ov-label">September 2026 · Core Budget <span style="color:var(--green);font-size:11px;margin-left:8px">🔴 Day 1</span></div>
+          <div class="ov-amount" style="color:var(--green)"><span>SAR</span>741.34</div>
+          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 (31 days)</div>
+        </div>
+        <div class="overview-pills">
+          <div class="pill green"><span class="pill-label">Remaining</span><span class="pill-val">6,258.66 SAR</span></div>
+          <div class="pill yellow"><span class="pill-label">Avg/day</span><span class="pill-val">370.67 SAR</span></div>
+          <div class="pill"><span class="pill-label">Day</span><span class="pill-val">1 of 31</span></div>
+        </div>
+      </div>
+      <div class="progress-track"><div class="progress-fill green" style="width:10.6%"></div></div>
+      <div class="progress-labels"><span>SAR 0</span><span class="pct">10.6% used</span><span>SAR 7,000</span></div>
+    </div>
+    <div class="donuts-grid" id="sep-donuts"></div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" type="text" id="sep-search" placeholder="Search September transactions..." oninput="filterSepTxns()">
+      <span class="search-count" id="sep-search-count"></span>
+    </div>
+    <div class="two-col">
+      <div class="section-card"><div class="section-title">Spending by Category</div><div id="sep-cats"></div></div>
+      <div class="section-card">
+        <div class="section-title">Extra Spending — Not Deducted from Budget</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <span class="extra-badge">⚠️ Isolated</span>
+          <span class="extra-total-val" id="sep-extra-val">SAR 759.00</span>
+        </div>
+        <div id="sep-extra-list"></div>
+      </div>
+    </div>
+    <div class="txn-list-wrap">
+      <div class="txn-list-header">
+        <div class="section-title" style="margin:0">All Transactions</div>
+        <span style="font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace" id="sep-txn-count"></span>
+      </div>
+      <div id="sep-txn-list"></div>
+      <div class="no-results" id="sep-no-results">No transactions match your search.</div>
+      <div class="load-more-wrap" id="sep-load-more-wrap">
+        <button class="load-more-btn" id="sep-load-more-btn" onclick="toggleSepTxns()">Show all remaining transactions</button>
+      </div>
+    </div>
+    <div class="insights-card" id="sep-insights"></div>
+  </div>
   <div id="panel-oct" class="month-panel"><div class="empty-state"><div class="es-icon">📭</div><h3>October — Not started</h3><p></p></div></div>
   <div id="panel-nov" class="month-panel"><div class="empty-state"><div class="es-icon">📭</div><h3>November — Not started</h3><p></p></div></div>
   <div id="panel-dec" class="month-panel"><div class="empty-state"><div class="es-icon">📭</div><h3>December — Not started</h3><p></p></div></div>
@@ -948,6 +994,7 @@ function toggleTheme(){
 // ── TABS ───────────────────────────────────────────────────
 function showMonth(m,el){
   if(m==='jun' && !document.getElementById('jun-donuts').children.length) initJune();
+  if(m==='sep' && !document.getElementById('sep-donuts').children.length) initSeptember();
   if(m==='jan' && !document.getElementById('jan-donuts').children.length) initJanuary();
   if(m==='feb' && !document.getElementById('feb-donuts').children.length) initFebruary();
   if(m==='mar' && !document.getElementById('mar-donuts').children.length) initMarch();
@@ -1265,7 +1312,7 @@ const ALL_MONTHS=[
   {key:'jun',label:'Jun',spent:6764.36,extra:5634.99,active:true,cycle:'May 24–Jun 27',days:35,avgDay:193.27,pct:96.6},
   {key:'jul',label:'Jul',spent:6496.84,extra:2118.41,active:true,txns:null},
   {key:'aug',label:'Aug',spent:6182.94,extra:4745.3,active:true,cycle:'Jul 27–Aug 26',days:31,avgDay:199.45,pct:88.3,overBudget:false,partial:false},
-  {key:'sep',label:'Sep',spent:0,extra:0,active:false},
+  {key:'sep',label:'Sep',spent:741.34,extra:759.0,active:true,cycle:'Aug 27–Sep 26',days:31,avgDay:370.67,pct:10.6,overBudget:false,partial:true},
   {key:'oct',label:'Oct',spent:0,extra:0,active:false},
   {key:'nov',label:'Nov',spent:0,extra:0,active:false},
   {key:'dec',label:'Dec',spent:0,extra:0,active:false},
