@@ -295,64 +295,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 }
 
 
-/* ── GIST LIVE SYSTEM ─────────────────────────────────────── */
-.sync-bar{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 14px;margin-bottom:20px;font-size:12px;}
-.sync-status{display:flex;align-items:center;gap:7px;color:var(--text-muted);}
-.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--text-faint);flex-shrink:0;}
-.sync-dot.green{background:var(--green);box-shadow:0 0 6px rgba(52,211,153,0.5);}
-.sync-dot.yellow{background:var(--yellow);animation:pulse 1.2s infinite;}
-.sync-dot.red{background:var(--red);}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.sync-actions{display:flex;gap:8px;}
-.sync-btn{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:5px 12px;color:var(--text-muted);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;white-space:nowrap;}
-.sync-btn:hover{border-color:var(--accent);color:var(--text);}
-.sync-btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;}
-.fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:50%;color:#fff;font-size:26px;cursor:pointer;box-shadow:0 4px 20px rgba(79,142,247,0.4);z-index:999;transition:transform 0.2s,box-shadow 0.2s;display:flex;align-items:center;justify-content:center;}
-.fab:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(79,142,247,0.5);}
-.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.75);z-index:8000;display:none;align-items:center;justify-content:center;padding:16px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);}
-.modal-overlay.visible{display:flex !important;}
-.modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow);}
-.modal h3{font-size:16px;font-weight:700;margin-bottom:4px;}
-.modal .modal-sub{font-size:12px;color:var(--text-muted);margin-bottom:20px;}
-.form-group{margin-bottom:14px;}
-.form-group label{display:block;font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:6px;}
-.form-input,.form-select,.form-textarea{width:100%;padding:10px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s;}
-.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent);}
-.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238b949e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;}
-.form-textarea{resize:vertical;min-height:60px;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.toggle-row{display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);}
-.toggle-label{font-size:13px;font-weight:500;flex:1;}
-.toggle{position:relative;width:44px;height:24px;flex-shrink:0;}
-.toggle input{opacity:0;width:0;height:0;}
-.toggle-slider{position:absolute;inset:0;background:var(--surface3);border-radius:12px;cursor:pointer;transition:0.2s;}
-.toggle-slider::before{content:'';position:absolute;width:18px;height:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:0.2s;}
-.toggle input:checked+.toggle-slider{background:var(--purple);}
-.toggle input:checked+.toggle-slider::before{transform:translateX(20px);}
-.modal-actions{display:flex;gap:10px;margin-top:20px;}
-.modal-btn{flex:1;padding:11px;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:opacity 0.2s;}
-.modal-btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;}
-.modal-btn.secondary{background:var(--surface2);color:var(--text-muted);border:1px solid var(--border);}
-.modal-btn:hover{opacity:0.85;}
-.live-empty{text-align:center;padding:48px 20px;color:var(--text-muted);}
-.live-empty .le-icon{font-size:40px;margin-bottom:12px;}
-.live-empty h3{font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px;}
-.live-empty p{font-size:12px;line-height:1.6;}
-.setup-required{background:var(--surface);border:1px solid rgba(251,191,36,0.3);border-left:3px solid var(--yellow);border-radius:var(--radius);padding:20px;text-align:center;}
-.setup-required p{font-size:13px;color:var(--text-muted);margin-bottom:14px;}
-.export-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);max-height:200px;overflow-y:auto;white-space:pre-wrap;word-break:break-all;margin-bottom:12px;}
-.live-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
-.live-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center;}
-.live-stat .ls-val{font-size:22px;font-weight:700;font-family:'DM Mono',monospace;}
-.live-stat .ls-label{font-size:10px;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-top:4px;}
-@media(max-width:480px){
-  .fab{bottom:16px;right:16px;width:50px;height:50px;font-size:22px;}
-  .form-row{grid-template-columns:1fr;}
-  .modal{padding:18px 14px;}
-  .sync-bar{flex-direction:column;gap:8px;align-items:flex-start;}
-  .live-stats{grid-template-columns:1fr 1fr;}
-}
-
 
 /* ── DONUT & STAT CARD CONSISTENCY FIXES ─────────────────────── */
 .donut-card {
@@ -788,53 +730,51 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <div class="insights-card" id="jun-insights"></div>
   </div>
   <div id="panel-aug" class="month-panel active">
-    <div id="aug-setup-required" class="setup-required" style="display:none">
-      <p>🔐 Connect your GitHub Gist to log and sync live transactions.</p>
-      <button class="modal-btn primary" style="max-width:200px;margin:0 auto" onclick="document.getElementById('setupModal').classList.remove('visible')">Connect Gist</button>
+    <div class="overview-card">
+      <div class="overview-top">
+        <div class="overview-left">
+          <div class="ov-label">August 2026 · Core Budget <span style="color:var(--green);font-size:11px;margin-left:8px">✅ Closed</span></div>
+          <div class="ov-amount" style="color:var(--yellow)"><span>SAR</span>6,182.94</div>
+          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 (31 days)</div>
+        </div>
+        <div class="overview-pills">
+          <div class="pill green"><span class="pill-label">Remaining</span><span class="pill-val">817.06 SAR</span></div>
+          <div class="pill yellow"><span class="pill-label">Avg/day</span><span class="pill-val">199.45 SAR</span></div>
+          <div class="pill"><span class="pill-label">Day</span><span class="pill-val">31 of 31</span></div>
+        </div>
+      </div>
+      <div class="progress-track"><div class="progress-fill yellow" style="width:88.3%"></div></div>
+      <div class="progress-labels"><span>SAR 0</span><span class="pct">88.3% used</span><span>SAR 7,000</span></div>
     </div>
-    <div id="aug-live-content">
-      <div class="sync-bar">
-        <div class="sync-status">
-          <div class="sync-dot yellow" id="syncDot"></div>
-          <span id="syncLabel">Connecting…</span>
-        </div>
-        <div class="sync-actions">
-          <button class="sync-btn" onclick="syncNow()">🔄 Sync</button>
-          <button class="sync-btn" onclick="openExport()">📤 Export for Claude</button>
-          <button class="sync-btn" onclick="document.getElementById('setupModal').classList.remove('visible')">⚙️ Settings</button>
-        </div>
-      </div>
-      <div class="live-stats" id="aug-live-stats">
-        <div class="live-stat"><div class="ls-val" id="ls-spent">—</div><div class="ls-label">Core Spent</div></div>
-        <div class="live-stat"><div class="ls-val" id="ls-remaining">—</div><div class="ls-label">Remaining</div></div>
-        <div class="live-stat"><div class="ls-val" id="ls-extra">—</div><div class="ls-label">Extra</div></div>
-      </div>
-      <div class="txn-list-wrap">
-        <div class="txn-list-header">
-          <div class="section-title" style="margin:0">August 2026 — Live Transactions</div>
-          <span style="font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace" id="aug-live-count">0 entries</span>
-        </div>
-        <div id="aug-live-list"></div>
-        <div class="live-empty" id="aug-live-empty">
-          <div class="le-icon">📭</div>
-          <h3>No transactions yet</h3>
-          <p>Tap the <strong>＋</strong> button to log your first August receipt.</p>
-        </div>
-      </div>
-      </div>
-      <div class="two-col" style="margin-top:20px">
-        <div class="section-card"><div class="section-title">Spending by Category — Live</div><div id="aug-cats"></div></div>
-        <div class="section-card">
-          <div class="section-title">Extra Spending — Not Deducted from Budget</div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-            <span class="extra-badge">⚠️ Isolated</span>
-            <span class="extra-total-val" id="aug-extra-total-val">SAR 0.00</span>
-          </div>
-          <div id="aug-extra-breakdown"></div>
-        </div>
-      </div>
-      <div class="insights-card" id="aug-insights-card" style="margin-top:20px;margin-bottom:20px"></div>
+    <div class="donuts-grid" id="aug-donuts"></div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" type="text" id="aug-search" placeholder="Search August transactions..." oninput="filterAugTxns()">
+      <span class="search-count" id="aug-search-count"></span>
     </div>
+    <div class="two-col">
+      <div class="section-card"><div class="section-title">Spending by Category</div><div id="aug-cats"></div></div>
+      <div class="section-card">
+        <div class="section-title">Extra Spending — Not Deducted from Budget</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <span class="extra-badge">⚠️ Highest Month</span>
+          <span class="extra-total-val">SAR 4,745.30</span>
+        </div>
+        <div id="aug-extra-list"></div>
+      </div>
+    </div>
+    <div class="txn-list-wrap">
+      <div class="txn-list-header">
+        <div class="section-title" style="margin:0">All Transactions</div>
+        <span style="font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace" id="aug-txn-count"></span>
+      </div>
+      <div id="aug-txn-list"></div>
+      <div class="no-results" id="aug-no-results">No transactions match your search.</div>
+      <div class="load-more-wrap" id="aug-load-more-wrap">
+        <button class="load-more-btn" id="aug-load-more-btn" onclick="toggleAugTxns()">Show all remaining transactions</button>
+      </div>
+    </div>
+    <div class="insights-card" id="aug-insights"></div>
   </div>
   <div id="panel-sep" class="month-panel">
     <div class="overview-card">
@@ -993,6 +933,7 @@ function toggleTheme(){
 
 // ── TABS ───────────────────────────────────────────────────
 function showMonth(m,el){
+  if(m==='aug' && !document.getElementById('aug-donuts').children.length) initAugust();
   if(m==='jun' && !document.getElementById('jun-donuts').children.length) initJune();
   if(m==='sep' && !document.getElementById('sep-donuts').children.length) initSeptember();
   if(m==='jan' && !document.getElementById('jan-donuts').children.length) initJanuary();
@@ -2840,664 +2781,379 @@ function buildMayInsights() {
 
 </script>
 
-<!-- SETUP MODAL -->
-<div class="modal-overlay" id="setupModal">
-  <div class="modal">
-    <h3>⚙️ Connect to GitHub Gist</h3>
-    <p class="modal-sub">Your token is stored only in this browser — never in the HTML file.</p>
-    <div class="form-group">
-      <label>GitHub Personal Access Token</label>
-      <input class="form-input" type="password" id="setupToken" placeholder="ghp_xxxxxxxxxxxx">
-    </div>
-    <div class="form-group">
-      <label>Gist ID</label>
-      <input class="form-input" type="text" id="setupGistId" value="bf03772ad1359a1e74bcc4a38133befa" placeholder="Gist ID">
-    </div>
-    <div class="modal-actions">
-      <button class="modal-btn secondary" onclick="closeSetup()">Cancel</button>
-      <button class="modal-btn primary" onclick="saveSetup()">Connect & Sync</button>
-    </div>
-  </div>
-</div>
 
-<!-- LOG RECEIPT MODAL -->
-<div class="modal-overlay" id="logModal">
-  <div class="modal">
-    <h3>➕ Log Transaction</h3>
-    <p class="modal-sub">New entry will sync to your Gist immediately.</p>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Date</label>
-        <input class="form-input" type="date" id="logDate">
-      </div>
-      <div class="form-group">
-        <label>Amount (SAR)</label>
-        <input class="form-input" type="number" id="logAmount" placeholder="0.00" step="0.01">
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Merchant</label>
-      <input class="form-input" type="text" id="logMerchant" placeholder="e.g. Starbucks H594">
-    </div>
-    <div class="form-group">
-      <label>Category</label>
-      <select class="form-select" id="logCategory">
-        <option>Café & Drinks</option>
-        <option>Food Delivery</option>
-        <option>Dining Out</option>
-        <option>Groceries</option>
-        <option>Meal Subscription</option>
-        <option>Fuel</option>
-        <option>Transport</option>
-        <option>Utilities</option>
-        <option>Household</option>
-        <option>Subscriptions</option>
-        <option>Health</option>
-        <option>Personal Care</option>
-        <option>Entertainment</option>
-        <option>Other</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Note (optional)</label>
-      <input class="form-input" type="text" id="logNote" placeholder="e.g. Morning coffee before shift">
-    </div>
-    <div class="form-group">
-      <label>Type</label>
-      <div class="toggle-row">
-        <span class="toggle-label" id="typeLabel">Core Budget</span>
-        <label class="toggle">
-          <input type="checkbox" id="logIsExtra" onchange="updateTypeLabel()">
-          <span class="toggle-slider"></span>
-        </label>
-      </div>
-    </div>
-    <div class="modal-actions">
-      <button class="modal-btn secondary" onclick="closeLog()">Cancel</button>
-      <button class="modal-btn primary" onclick="saveTransaction()">Save & Sync</button>
-    </div>
-  </div>
-</div>
 
-<!-- EXPORT MODAL -->
-<div class="modal-overlay" id="exportModal">
-  <div class="modal">
-    <h3>📤 Export for Claude</h3>
-    <p class="modal-sub">Copy this JSON and paste it to Claude for analysis.</p>
-    <div class="export-box" id="exportBox"></div>
-    <div class="modal-actions">
-      <button class="modal-btn secondary" onclick="document.getElementById('exportModal').classList.remove('visible')">Close</button>
-      <button class="modal-btn primary" onclick="copyExport(this)">📋 Copy to Clipboard</button>
-    </div>
-  </div>
-</div>
 
-<!-- FAB -->
-<button class="fab" onclick="try{openLog();}catch(e){alert('Error: '+e.message);}" title="Log new transaction">＋</button>
 
 <script>
-// ── GIST LIVE SYSTEM ──────────────────────────────────────
-const GIST_ID = "bf03772ad1359a1e74bcc4a38133befa";
-const GIST_FILE = "budget_data.json";
-let gistToken = localStorage.getItem("gist_token") || "";
-let localData = {transactions:[], extra:[]};
 
-// ── SETUP MODAL ───────────────────────────────────────────
-function closeSetup() {
-  document.getElementById("setupModal").classList.remove("visible");
+// ── AUGUST DATA ───────────────────────────────────────────
+const augTransactions = [
+  {date:'2026-07-27',merchant:'QAF Cafe',category:'Café & Drinks',amount:16.00,note:'Morning coffee',icon:'☕'},
+  {date:'2026-07-27',merchant:'Parking',category:'Transport',amount:7.00,note:'',icon:'🅿️'},
+  {date:'2026-07-27',merchant:'Groceries',category:'Groceries',amount:20.00,note:'',icon:'🛒'},
+  {date:'2026-07-27',merchant:'FitnessTime',category:'Groceries',amount:15.00,note:'Protein muffin',icon:'🛒'},
+  {date:'2026-07-27',merchant:'HungerStation',category:'Food Delivery',amount:83.00,note:'',icon:'🛵'},
+  {date:'2026-07-27',merchant:'Parking',category:'Transport',amount:3.45,note:'',icon:'🅿️'},
+  {date:'2026-07-27',merchant:'Grocery',category:'Groceries',amount:122.00,note:'',icon:'🛒'},
+  {date:'2026-07-28',merchant:'TRANSIT',category:'Fuel',amount:110.00,note:'Car gas',icon:'⛽'},
+  {date:'2026-07-28',merchant:'Half Million',category:'Café & Drinks',amount:16.00,note:'Morning café',icon:'☕'},
+  {date:'2026-07-28',merchant:'Egg Oyoun',category:'Dining Out',amount:25.00,note:'Morning breakfast',icon:'🍳'},
+  {date:'2026-07-28',merchant:'Market',category:'Food Delivery',amount:18.00,note:'Rawaby snack at work',icon:'🛵'},
+  {date:'2026-07-28',merchant:'QAF',category:'Café & Drinks',amount:16.00,note:'Morning coffee',icon:'☕'},
+  {date:'2026-07-29',merchant:'Zain',category:'Utilities',amount:286.35,note:'Internet subscription',icon:'⚡'},
+  {date:'2026-07-29',merchant:'SRC',category:'Subscriptions',amount:264.50,note:'Mobile subscription',icon:'📱'},
+  {date:'2026-07-29',merchant:'Saudi Electricity Co',category:'Household',amount:408.89,note:'Electricity bill',icon:'⚡'},
+  {date:'2026-07-29',merchant:'HungerStation',category:'Food Delivery',amount:85.24,note:'Lunch',icon:'🛵'},
+  {date:'2026-07-29',merchant:'Microsoft',category:'Subscriptions',amount:43.98,note:'Microsoft 365',icon:'📱'},
+  {date:'2026-07-29',merchant:'Okawa Cafe',category:'Café & Drinks',amount:58.00,note:'Japanese pancake with wife',icon:'☕'},
+  {date:'2026-07-29',merchant:'Blue Age',category:'Personal Care',amount:246.00,note:'Shopping for clothes',icon:'✂️'},
+  {date:'2026-07-29',merchant:'Bath & Body Works',category:'Household',amount:100.00,note:'Home hand soap',icon:'🏠'},
+  {date:'2026-07-29',merchant:'Mathaq Aljawharah',category:'Food Delivery',amount:47.00,note:'',icon:'🛵'},
+  {date:'2026-07-30',merchant:'Half Million',category:'Café & Drinks',amount:37.00,note:'Morning coffee',icon:'☕'},
+  {date:'2026-07-30',merchant:'Easy Parking',category:'Transport',amount:13.00,note:'',icon:'🅿️'},
+  {date:'2026-07-30',merchant:'HungerStation',category:'Food Delivery',amount:140.00,note:'Wagyu burgers',icon:'🛵'},
+  {date:'2026-07-30',merchant:'HungerStation',category:'Groceries',amount:72.00,note:'',icon:'🛒'},
+  {date:'2026-07-31',merchant:'Parking.Sa',category:'Transport',amount:9.00,note:'',icon:'🅿️'},
+  {date:'2026-07-31',merchant:'HungerStation',category:'Food Delivery',amount:52.50,note:'Breakfast',icon:'🛵'},
+  {date:'2026-07-31',merchant:'Starbucks',category:'Café & Drinks',amount:24.00,note:'',icon:'☕'},
+  {date:'2026-07-31',merchant:'Gas Station',category:'Fuel',amount:97.00,note:'Car gas',icon:'⛽'},
+  {date:'2026-08-01',merchant:'HungerStation',category:'Groceries',amount:210.00,note:'',icon:'🛒'},
+  {date:'2026-08-01',merchant:'HungerStation',category:'Food Delivery',amount:50.00,note:'Night shawarma',icon:'🛵'},
+  {date:'2026-08-02',merchant:'Java Cafe',category:'Café & Drinks',amount:36.00,note:'',icon:'☕'},
+  {date:'2026-08-02',merchant:'Habba Cafe',category:'Café & Drinks',amount:18.00,note:"Wife's morning café",icon:'☕'},
+  {date:'2026-08-02',merchant:'Easy Parking',category:'Transport',amount:20.00,note:'',icon:'🅿️'},
+  {date:'2026-08-02',merchant:'Al Hoj',category:'Groceries',amount:10.00,note:'Market stuff',icon:'🛒'},
+  {date:'2026-08-03',merchant:'Starbucks',category:'Café & Drinks',amount:24.00,note:'',icon:'☕'},
+  {date:'2026-08-03',merchant:'Easy Parking',category:'Transport',amount:18.00,note:'',icon:'🅿️'},
+  {date:'2026-08-03',merchant:'HungerStation',category:'Food Delivery',amount:65.00,note:'',icon:'🛵'},
+  {date:'2026-08-03',merchant:'Baskin Robbins',category:'Dining Out',amount:28.00,note:'',icon:'🍳'},
+  {date:'2026-08-03',merchant:'Danube',category:'Groceries',amount:132.00,note:'Weekly fruits',icon:'🛒'},
+  {date:'2026-08-04',merchant:'Falafel Alchef',category:'Food Delivery',amount:20.00,note:'Breakfast',icon:'🛵'},
+  {date:'2026-08-04',merchant:'Al Wefaq Foods',category:'Dining Out',amount:22.00,note:"Wife's lunch at work",icon:'🍳'},
+  {date:'2026-08-04',merchant:'Al Hoj',category:'Groceries',amount:16.75,note:"Wife's snacks at work",icon:'🛒'},
+  {date:'2026-08-04',merchant:'Easy Parking',category:'Transport',amount:20.70,note:'Work parking',icon:'🅿️'},
+  {date:'2026-08-04',merchant:'Apple',category:'Subscriptions',amount:90.00,note:'ChatGPT monthly',icon:'📱'},
+  {date:'2026-08-04',merchant:'HungerStation',category:'Groceries',amount:116.00,note:'',icon:'🛒'},
+  {date:'2026-08-05',merchant:'Taxi',category:'Transport',amount:78.00,note:'Taxi from work to home',icon:'🚗'},
+  {date:'2026-08-05',merchant:'HungerStation',category:'Food Delivery',amount:55.00,note:'Morning breakfast',icon:'🛵'},
+  {date:'2026-08-05',merchant:'Easy Parking',category:'Transport',amount:23.00,note:'',icon:'🅿️'},
+  {date:'2026-08-05',merchant:'HungerStation',category:'Food Delivery',amount:70.00,note:'Dinner',icon:'🛵'},
+  {date:'2026-08-05',merchant:'Al Nahdi Pharmacy',category:'Health',amount:95.00,note:"Wife's medication",icon:'💊'},
+  {date:'2026-08-06',merchant:'Cacti Cafe',category:'Café & Drinks',amount:17.00,note:'',icon:'☕'},
+  {date:'2026-08-06',merchant:'Riyadh Parking',category:'Transport',amount:7.00,note:'',icon:'🅿️'},
+  {date:'2026-08-06',merchant:'Al Hoj Market',category:'Groceries',amount:8.00,note:"Wife's snacks",icon:'🛒'},
+  {date:'2026-08-06',merchant:'Easy Parking',category:'Transport',amount:9.00,note:'',icon:'🅿️'},
+  {date:'2026-08-06',merchant:'Shawarma Albalad',category:'Food Delivery',amount:23.00,note:'Lunch',icon:'🛵'},
+  {date:'2026-08-07',merchant:'Google',category:'Subscriptions',amount:27.00,note:'YouTube subscription',icon:'📱'},
+  {date:'2026-08-07',merchant:'Dominos',category:'Dining Out',amount:78.00,note:'Dinner at airport',icon:'🍳'},
+  {date:'2026-08-15',merchant:'Hun',category:'Food Delivery',amount:72.61,note:'Breakfast',icon:'🛵'},
+  {date:'2026-08-15',merchant:'HungerStation',category:'Groceries',amount:191.00,note:'',icon:'🛒'},
+  {date:'2026-08-15',merchant:'Taxi',category:'Transport',amount:78.00,note:'Transport from airport to home',icon:'🚗'},
+  {date:'2026-08-15',merchant:'HungerStation',category:'Food Delivery',amount:41.00,note:'',icon:'🛵'},
+  {date:'2026-08-16',merchant:'Riyadh Parking',category:'Transport',amount:6.90,note:'',icon:'🅿️'},
+  {date:'2026-08-16',merchant:'Fresh House',category:'Meal Subscription',amount:364.66,note:'Meal subscription',icon:'🥗'},
+  {date:'2026-08-16',merchant:'Githaa',category:'Subscriptions',amount:327.25,note:"Wife's meal subscription",icon:'🥗'},
+  {date:'2026-08-16',merchant:'Burgerizer',category:'Dining Out',amount:62.00,note:'',icon:'🍳'},
+  {date:'2026-08-17',merchant:'HungerStation',category:'Groceries',amount:44.94,note:'',icon:'🛒'},
+  {date:'2026-08-17',merchant:'Riyadh Parking',category:'Transport',amount:17.25,note:'',icon:'🅿️'},
+  {date:'2026-08-17',merchant:'Al Wefaq Foods',category:'Dining Out',amount:28.00,note:"Wife's lunch at work",icon:'🍳'},
+  {date:'2026-08-17',merchant:'Riyadh Parking',category:'Transport',amount:6.90,note:'',icon:'🅿️'},
+  {date:'2026-08-17',merchant:'HungerStation',category:'Groceries',amount:123.00,note:'',icon:'🛒'},
+  {date:'2026-08-18',merchant:'Fullel Gas',category:'Fuel',amount:110.00,note:'Car gas',icon:'⛽'},
+  {date:'2026-08-20',merchant:'Easy Parking',category:'Transport',amount:6.90,note:'',icon:'🅿️'},
+  {date:'2026-08-22',merchant:'Starbucks',category:'Café & Drinks',amount:68.00,note:'',icon:'☕'},
+  {date:'2026-08-22',merchant:'Wathbah',category:'Café & Drinks',amount:36.00,note:'',icon:'☕'},
+  {date:'2026-08-22',merchant:'HungerStation',category:'Food Delivery',amount:55.00,note:'Breakfast',icon:'🛵'},
+  {date:'2026-08-23',merchant:'Uber',category:'Transport',amount:76.00,note:"Wife's Uber home",icon:'🚗'},
+  {date:'2026-08-23',merchant:'SASCO',category:'Fuel',amount:110.00,note:'Car gas',icon:'⛽'},
+  {date:'2026-08-24',merchant:'Easy Parking',category:'Transport',amount:9.20,note:'',icon:'🅿️'},
+  {date:'2026-08-24',merchant:'HungerStation',category:'Groceries',amount:98.00,note:'',icon:'🛒'},
+  {date:'2026-08-25',merchant:'Apple',category:'Subscriptions',amount:12.99,note:'iCloud subscription',icon:'📱'},
+  {date:'2026-08-25',merchant:'HungerStation',category:'Food Delivery',amount:99.00,note:'Weekend cheat dinner',icon:'🛵'},
+  {date:'2026-08-25',merchant:'Co Dunya',category:'Personal Care',amount:129.00,note:'New Thobe',icon:'✂️'},
+  {date:'2026-08-25',merchant:'Salun Lama',category:'Personal Care',amount:50.00,note:'Haircut',icon:'✂️'},
+  {date:'2026-08-25',merchant:'HungerStation',category:'Food Delivery',amount:54.98,note:'Dinner',icon:'🛵'},
+];
+
+const augExtra = [
+  {date:'Jul 27',name:'💸 Fatimah Alqarni',note:'Mom money gift',amount:600.00},
+  {date:'Jul 29',name:'🎬 VOX Cinema',note:'Entertainment',amount:135.00},
+  {date:'Jul 30',name:'⚽ Arsenal Academy',note:'Entertainment',amount:50.00},
+  {date:'Jul 30',name:'🏥 NMC',note:'Medical',amount:27.00},
+  {date:'Jul 31',name:'🍬 HungerStation',note:'Sweet for family gift',amount:115.90},
+  {date:'Aug 4',name:'📱 Apple',note:'TimeLog app',amount:60.00},
+  {date:'Aug 4',name:'📚 Boardvitals',note:'MCQ bank subscription',amount:215.00},
+  {date:'Aug 6',name:'🏥 Waryd Labs',note:'NIPT screening test',amount:825.00},
+  {date:'Aug 6',name:'🍽️ JADT Algethaa',note:'Dinner with wife family',amount:134.00},
+  {date:'Aug 6',name:'🎳 Safforiland',note:'Bowling with wife family',amount:156.00},
+  {date:'Aug 7',name:'🎧 NOON',note:'Earphones',amount:280.00},
+  {date:'Aug 16',name:'💸 Family Support',note:'Brother support',amount:200.00},
+  {date:'Aug 18',name:'☕ Flame',note:'NGHA coffee',amount:44.00},
+  {date:'Aug 18',name:'🍽️ NGHA',note:'NGHA lunch',amount:63.80},
+  {date:'Aug 20',name:'👔 Scrub N',note:"Wife's lab coat",amount:204.00},
+  {date:'Aug 21',name:'💸 Family Support',note:'Family support',amount:200.00},
+  {date:'Aug 21',name:'🎾 Playtomic',note:'Padel game',amount:93.60},
+  {date:'Aug 22',name:'🚖 Bolt',note:'Taxi to home',amount:170.00},
+  {date:'Aug 22',name:'🗣️ Apple',note:'Duolingo family yearly',amount:300.00},
+  {date:'Aug 22',name:'📄 PDF Editor',note:'One-time payment',amount:70.00},
+  {date:'Aug 23',name:'💸 Bank Transfer',note:'Family support',amount:150.00},
+  {date:'Aug 24',name:'🏋️ Wael',note:'Snack at gym',amount:10.00},
+  {date:'Aug 24',name:'🔧 Bank Transfer',note:'Split AC repair',amount:550.00},
+  {date:'Aug 26',name:'☕ Flame Roast',note:'Coffee & lunch with friends',amount:60.00},
+];
+
+let augTxnsExpanded = false;
+
+function initAugust() {
+  buildAugDonuts(); buildAugCategories(); buildAugTransactions(); buildAugExtraList(); buildAugInsights();
 }
 
-async function saveSetup() {
-  const tok = document.getElementById("setupToken").value.trim();
-  if(!tok) { alert("Please enter your GitHub token"); return; }
-  gistToken = tok;
-  localStorage.setItem("gist_token", tok);
-  closeSetup();
-  await syncNow();
+function buildAugDonuts() {
+  const total = augTransactions.reduce((s,t)=>s+t.amount,0);
+  const rem = 7000 - total;
+  const r=36, circ=2*Math.PI*r;
+  const ds=[
+    {label:'Budget Used',val:'88.3%',sub:fmt(total)+' SAR',color:'#fbbf24',pct:88.3},
+    {label:'Remaining',val:fmt(rem),sub:'SAR remaining',color:'#34d399',pct:rem/7000*100},
+    {label:'Avg / Day',val:'199',sub:'SAR per day (31d)',color:'#34d399',pct:Math.min(199/233*100,100)},
+    {label:'Transactions',val:augTransactions.length,sub:'core entries',color:'#4f8ef7',pct:Math.min(augTransactions.length/100*100,100)},
+  ];
+  document.getElementById('aug-donuts').innerHTML=ds.map(d=>{
+    const off=circ-(d.pct/100)*circ;
+    return `<div class="donut-card"><div class="donut-label">${d.label}</div>
+      <div class="donut-wrap"><svg width="86" height="86" viewBox="0 0 90 90">
+        <circle class="donut-bg" cx="45" cy="45" r="${r}"/>
+        <circle class="donut-fill" cx="45" cy="45" r="${r}" stroke="${d.color}" stroke-dasharray="${circ}" stroke-dashoffset="${off}"/>
+      </svg><div class="donut-center"><div class="donut-val" style="color:${d.color}">${d.val}</div><div class="donut-unit">·</div></div></div>
+      <div class="donut-sub">${d.sub}</div></div>`;
+  }).join('');
 }
 
-// ── GIST API ──────────────────────────────────────────────
-async function fetchGist() {
-  if(!gistToken) return null;
-  try {
-    const r = await fetch("https://api.github.com/gists/" + GIST_ID, {
-      headers: {
-        "Authorization": "token " + gistToken,
-        "Accept": "application/vnd.github.v3+json"
-      }
-    });
-    if(!r.ok) { setSyncStatus("red", "Auth failed — check token"); return null; }
-    const g = await r.json();
-    const raw = g.files[GIST_FILE] ? g.files[GIST_FILE].content : "{}";
-    return JSON.parse(raw);
-  } catch(e) {
-    setSyncStatus("red", "Network error");
-    return null;
-  }
+function buildAugCategories() {
+  const tot={};
+  augTransactions.forEach(t=>tot[t.category]=(tot[t.category]||0)+t.amount);
+  const grand=Object.values(tot).reduce((a,b)=>a+b,0);
+  const allCfg=Object.assign({},catConfig,junCatConfig,{'Meal Subscription':{color:'#10b981',bg:'rgba(16,185,129,0.12)'},'Utilities':{color:'#0ea5e9',bg:'rgba(14,165,233,0.12)'}});
+  const icons=Object.assign({},catIcons,{'Utilities':'⚡','Meal Subscription':'🥗'});
+  document.getElementById('aug-cats').innerHTML=Object.entries(tot).sort((a,b)=>b[1]-a[1]).map(([c,amt])=>{
+    const cfg=allCfg[c]||{color:'#8b949e',bg:'rgba(139,148,158,0.12)'};
+    return `<div class="cat-row">
+      <div class="cat-icon-wrap" style="background:${cfg.bg}">${icons[c]||'📦'}</div>
+      <div class="cat-info"><div class="cat-name">${c}</div>
+        <div class="cat-bar-wrap"><div class="cat-bar" style="width:${(amt/grand*100).toFixed(1)}%;background:${cfg.color}"></div></div>
+      </div>
+      <div class="cat-right"><div class="cat-amount">${fmt(amt)}</div><div class="cat-pct">${(amt/7000*100).toFixed(1)}%</div></div>
+    </div>`;
+  }).join('');
 }
 
-async function pushGist(data) {
-  if(!gistToken) return false;
-  try {
-    const body = {};
-    body.files = {};
-    body.files[GIST_FILE] = { content: JSON.stringify(data, null, 2) };
-    const r = await fetch("https://api.github.com/gists/" + GIST_ID, {
-      method: "PATCH",
-      headers: {
-        "Authorization": "token " + gistToken,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(body)
-    });
-    return r.ok;
-  } catch(e) { return false; }
+function buildAugTransactions() {
+  const reversed=[...augTransactions].reverse();
+  document.getElementById('aug-txn-count').textContent=reversed.length+' transactions';
+  const allCfg=Object.assign({},catConfig,junCatConfig,{'Meal Subscription':{color:'#10b981',bg:'rgba(16,185,129,0.12)'}});
+  document.getElementById('aug-txn-list').innerHTML=reversed.map((t,i)=>{
+    const cfg=allCfg[t.category]||{color:'#8b949e',bg:'rgba(139,148,158,0.12)'};
+    const d=new Date(t.date);
+    const ds=d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+    const collapsed=i>=5?'collapsed':'';
+    return `<div class="txn-item ${collapsed}" data-search="${(t.merchant+' '+t.category+' '+t.amount+' '+t.note+' '+t.date).toLowerCase()}">
+      <div class="txn-icon-wrap" style="background:${cfg.bg}">${t.icon}</div>
+      <div class="txn-info"><div class="txn-merchant">${t.merchant}</div>
+        <div class="txn-meta">${t.category}</div>
+        ${t.note?`<div class="txn-note">${t.note}</div>`:''}
+      </div>
+      <div class="txn-amount" style="color:${cfg.color}">${fmt(t.amount)}</div>
+      <div class="txn-date">${ds}</div>
+    </div>`;
+  }).join('');
+  const rem=reversed.length-5;
+  if(rem>0) document.getElementById('aug-load-more-btn').textContent=`Show all ${rem} remaining transactions ↓`;
+  else document.getElementById('aug-load-more-wrap').style.display='none';
 }
 
-function setSyncStatus(state, msg) {
-  const dot = document.getElementById("syncDot");
-  const lbl = document.getElementById("syncLabel");
-  if(!dot || !lbl) return;
-  dot.className = "sync-dot " + state;
-  lbl.textContent = msg;
-}
-
-async function syncNow() {
-  if(!gistToken) {
-    setSyncStatus("yellow", "Not connected — click Settings");
-    return;
-  }
-  setSyncStatus("yellow", "Syncing…");
-  const data = await fetchGist();
-  if(!data) { setSyncStatus("red", "Failed — check token in Settings"); return; }
-  localData = data.august || {transactions:[], extra:[]};
-  renderLive();
-  const t = new Date().toLocaleTimeString("en-GB", {hour:"2-digit", minute:"2-digit"});
-  setSyncStatus("green", "Synced · " + t);
-}
-
-// ── RENDER LIVE ───────────────────────────────────────────
-const COL = {"Café & Drinks":"#fbbf24","Food Delivery":"#c084fc","Dining Out":"#fb923c","Groceries":"#34d399","Meal Subscription":"#10b981","Fuel":"#f87171","Transport":"#4f8ef7","Utilities":"#0ea5e9","Household":"#79c0ff","Subscriptions":"#22d3ee","Health":"#f472b6","Personal Care":"#a78bfa","Entertainment":"#56d364","Other":"#8b949e"};
-const BG  = {"Café & Drinks":"rgba(251,191,36,0.12)","Food Delivery":"rgba(192,132,252,0.12)","Dining Out":"rgba(251,146,60,0.12)","Groceries":"rgba(52,211,153,0.12)","Meal Subscription":"rgba(16,185,129,0.12)","Fuel":"rgba(248,113,113,0.12)","Transport":"rgba(79,142,247,0.12)","Utilities":"rgba(14,165,233,0.12)","Household":"rgba(121,192,255,0.12)","Subscriptions":"rgba(34,211,238,0.12)","Health":"rgba(244,114,182,0.12)","Personal Care":"rgba(167,139,250,0.12)","Entertainment":"rgba(86,211,100,0.12)","Other":"rgba(139,148,158,0.12)"};
-const ICO = {"Café & Drinks":"☕","Food Delivery":"🛵","Dining Out":"🍳","Groceries":"🛒","Meal Subscription":"🥗","Fuel":"⛽","Transport":"🚗","Utilities":"⚡","Household":"🧹","Subscriptions":"📱","Health":"💊","Personal Care":"✂️","Entertainment":"⚽","Other":"📦"};
-
-function renderLive() {
-  const txns  = (localData.transactions || []).slice().sort(function(a,b){ return b.date.localeCompare(a.date); });
-  const extras = localData.extra || [];
-  const coreSpent  = txns.reduce(function(s,t){ return s+t.amount; }, 0);
-  const extraSpent = extras.reduce(function(s,e){ return s+e.amount; }, 0);
-  const rem = 7000 - coreSpent;
-
-  var ls = document.getElementById("ls-spent");
-  var lr = document.getElementById("ls-remaining");
-  var le = document.getElementById("ls-extra");
-  if(ls) ls.textContent = fmt(coreSpent);
-  if(lr){ lr.textContent = fmt(Math.abs(rem)); lr.style.color = rem >= 0 ? "var(--green)" : "var(--red)"; }
-  if(le) le.textContent = fmt(extraSpent);
-
-  var list  = document.getElementById("aug-live-list");
-  var empty = document.getElementById("aug-live-empty");
-  var count = document.getElementById("aug-live-count");
-  if(!list) return;
-
-  if(txns.length === 0 && extras.length === 0) {
-    list.innerHTML = "";
-    if(empty) empty.style.display = "block";
-    if(count) count.textContent = "0 entries";
-    return;
-  }
-  if(empty) empty.style.display = "none";
-  if(count) count.textContent = txns.length + " core · " + extras.length + " extra";
-
-  var html = txns.map(function(t) {
-    var col  = COL[t.category] || "#8b949e";
-    var bg   = BG[t.category]  || "rgba(139,148,158,0.12)";
-    var icon = ICO[t.category] || "📦";
-    var d = new Date(t.date + "T12:00:00").toLocaleDateString("en-GB", {day:"numeric", month:"short"});
-    return "<div class=\"txn-item\">" +
-      "<div class=\"txn-icon-wrap\" style=\"background:" + bg + "\">" + icon + "</div>" +
-      "<div class=\"txn-info\">" +
-        "<div class=\"txn-merchant\">" + t.merchant + "</div>" +
-        "<div class=\"txn-meta\">" + t.category + "</div>" +
-        (t.note ? "<div class=\"txn-note\">" + t.note + "</div>" : "") +
-      "</div>" +
-      "<div class=\"txn-amount\" style=\"color:" + col + "\">" + fmt(t.amount) + "</div>" +
-      "<div class=\"txn-date\">" + d + "</div>" +
-    "</div>";
-  }).join("") +
-  (extras.length > 0 ? "<div style=\"padding:10px 20px 4px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--purple);font-weight:600;border-top:1px solid var(--surface2)\">⚠️ Extra Spending</div>" : "") +
-  extras.map(function(e) {
-    var d = e.date ? new Date(e.date + "T12:00:00").toLocaleDateString("en-GB", {day:"numeric", month:"short"}) : "—";
-    return "<div class=\"txn-item\">" +
-      "<div class=\"txn-icon-wrap\" style=\"background:rgba(192,132,252,0.12)\">⚠️</div>" +
-      "<div class=\"txn-info\">" +
-        "<div class=\"txn-merchant\">" + e.merchant + "</div>" +
-        "<div class=\"txn-meta\" style=\"color:var(--purple)\">Extra — not in budget</div>" +
-        (e.note ? "<div class=\"txn-note\">" + e.note + "</div>" : "") +
-      "</div>" +
-      "<div class=\"txn-amount\" style=\"color:var(--purple)\">" + fmt(e.amount) + "</div>" +
-      "<div class=\"txn-date\">" + d + "</div>" +
-    "</div>";
-  }).join("");
-  list.innerHTML = html;
-}
-
-// ── LOG FORM ──────────────────────────────────────────────
-function openLog() {
-  if(!gistToken) {
-    var sm = document.getElementById("setupModal");
-    if(sm){ sm.classList.add("visible"); }
-    var st = document.getElementById("setupToken");
-    if(st){ setTimeout(function(){ st.focus(); }, 100); }
-    return;
-  }
-  var today = new Date().toISOString().split("T")[0];
-  var fields = ["logDate","logAmount","logMerchant","logNote"];
-  fields.forEach(function(id){
-    var el = document.getElementById(id);
-    if(el) el.value = id === "logDate" ? today : "";
+function toggleAugTxns() {
+  augTxnsExpanded=!augTxnsExpanded;
+  document.querySelectorAll('#aug-txn-list .txn-item').forEach((el,i)=>{
+    if(i<5)return;
+    if(augTxnsExpanded){el.classList.remove('collapsed');}
+    else{el.classList.remove('hidden');el.classList.add('collapsed');}
   });
-  var isExtra = document.getElementById("logIsExtra");
-  if(isExtra) isExtra.checked = false;
-  var cat = document.getElementById("logCategory");
-  if(cat) cat.value = "Café & Drinks";
-  updateTypeLabel();
-  var lm = document.getElementById("logModal");
-  if(lm){
-    lm.classList.add("visible");
-    setTimeout(function(){
-      var m = document.getElementById("logMerchant");
-      if(m) m.focus();
-    }, 200);
-  }
+  const rem=augTransactions.length-5;
+  document.getElementById('aug-load-more-btn').textContent=augTxnsExpanded?'Show less ↑':`Show all ${rem} remaining transactions ↓`;
 }
 
-function closeLog() {
-  document.getElementById("logModal").classList.remove("visible");
-}
-
-function updateTypeLabel() {
-  var isExtra = document.getElementById("logIsExtra").checked;
-  document.getElementById("typeLabel").textContent = isExtra ? "⚠️ Extra Spending" : "✅ Core Budget";
-}
-
-async function saveTransaction() {
-  var merchant = document.getElementById("logMerchant").value.trim();
-  var amount   = parseFloat(document.getElementById("logAmount").value);
-  var date     = document.getElementById("logDate").value;
-  var category = document.getElementById("logCategory").value;
-  var note     = document.getElementById("logNote").value.trim();
-  var isExtra  = document.getElementById("logIsExtra").checked;
-
-  if(!merchant || !amount || isNaN(amount) || !date) {
-    alert("Please fill in date, merchant and amount");
-    return;
-  }
-
-  var entry = {
-    id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
-    date: date,
-    merchant: merchant,
-    category: category,
-    amount: amount,
-    note: note,
-    logged_at: new Date().toISOString()
-  };
-
-  closeLog();
-  setSyncStatus("yellow", "Saving…");
-
-  // Optimistic local update
-  if(!localData.transactions) localData.transactions = [];
-  if(!localData.extra) localData.extra = [];
-  if(isExtra) { localData.extra.push(entry); }
-  else { localData.transactions.push(entry); }
-  renderLive();
-
-  // Push to Gist
-  var existing = await fetchGist() || {};
-  existing.august = localData;
-  existing.last_updated = new Date().toISOString();
-  var ok = await pushGist(existing);
-  var t = new Date().toLocaleTimeString("en-GB", {hour:"2-digit", minute:"2-digit"});
-  if(ok) { setSyncStatus("green", "Saved · " + t); }
-  else   { setSyncStatus("red", "Save failed — try syncing again"); }
-}
-
-// ── EXPORT FOR CLAUDE ─────────────────────────────────────
-function openExport() {
-  var txns    = localData.transactions || [];
-  var extras  = localData.extra || [];
-  var coreSpent  = txns.reduce(function(s,t){ return s+t.amount; }, 0);
-  var extraSpent = extras.reduce(function(s,e){ return s+e.amount; }, 0);
-  var exportObj = {
-    month: "August 2026",
-    cycle: "Jul 28 – Aug 27",
-    budget_sar: 7000,
-    core_spent_sar: parseFloat(coreSpent.toFixed(2)),
-    remaining_sar: parseFloat((7000 - coreSpent).toFixed(2)),
-    extra_total_sar: parseFloat(extraSpent.toFixed(2)),
-    core_transaction_count: txns.length,
-    extra_transaction_count: extras.length,
-    transactions: txns,
-    extra_spending: extras,
-    exported_at: new Date().toISOString()
-  };
-  document.getElementById("exportBox").textContent = JSON.stringify(exportObj, null, 2);
-  document.getElementById("exportModal").classList.add("visible");
-}
-
-function copyExport(btn) {
-  var text = document.getElementById("exportBox").textContent;
-  var success = false;
-
-  // Method 1: Modern clipboard API (works on HTTPS desktop + modern mobile)
-  if(navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(function() {
-      btn.textContent = "✅ Copied!";
-      setTimeout(function(){ btn.textContent = "📋 Copy to Clipboard"; }, 2500);
-    }).catch(function() {
-      fallbackCopy(text, btn);
-    });
-    return;
-  }
-  // Method 2: execCommand fallback (older browsers + iOS Safari)
-  fallbackCopy(text, btn);
-}
-
-function fallbackCopy(text, btn) {
-  var ta = document.createElement("textarea");
-  ta.value = text;
-  ta.style.position = "fixed";
-  ta.style.top = "0";
-  ta.style.left = "0";
-  ta.style.opacity = "0";
-  ta.style.fontSize = "16px"; // prevents iOS zoom
-  document.body.appendChild(ta);
-  ta.focus();
-  ta.select();
-  // iOS needs this extra step
-  ta.setSelectionRange(0, ta.value.length);
-  var ok = false;
-  try { ok = document.execCommand("copy"); } catch(e) {}
-  document.body.removeChild(ta);
-  if(ok) {
-    btn.textContent = "✅ Copied!";
-    setTimeout(function(){ btn.textContent = "📋 Copy to Clipboard"; }, 2500);
+function filterAugTxns() {
+  const q=document.getElementById('aug-search').value.toLowerCase().trim();
+  const items=document.querySelectorAll('#aug-txn-list .txn-item');
+  let vis=0;
+  if(q){
+    items.forEach(el=>{el.classList.remove('collapsed');const m=el.dataset.search.includes(q);el.classList.toggle('hidden',!m);if(m)vis++;});
+    document.getElementById('aug-load-more-wrap').style.display='none';
   } else {
-    // Last resort: show the text in a prompt so user can copy manually
-    window.prompt("Copy this text (Ctrl+A then Ctrl+C / Cmd+A then Cmd+C):", text);
+    items.forEach((el,i)=>{el.classList.remove('hidden');if(i>=5&&!augTxnsExpanded)el.classList.add('collapsed');vis++;});
+    document.getElementById('aug-load-more-wrap').style.display='block';
   }
+  document.getElementById('aug-search-count').textContent=q?vis+' results':'';
+  document.getElementById('aug-no-results').style.display=(q&&vis===0)?'block':'none';
 }
 
-// ── INIT: AUTO-SYNC ON AUG TAB ────────────────────────────
-(function() {
-  var _orig = window.showMonth;
-  window.showMonth = function(m, el) {
-    _orig(m, el);
-    if(m === "aug") {
-      if(!gistToken) {
-        setSyncStatus("yellow", "Not connected — click ⚙️ Settings");
-      } else {
-        syncNow();
-      }
-    }
-  };
-})();
+function buildAugExtraList() {
+  document.getElementById('aug-extra-list').innerHTML=augExtra.map(e=>`
+    <div class="extra-row"><span class="er-name">${e.name} · ${e.note} · ${e.date}</span><span class="er-amount">${fmt(e.amount)}</span></div>`).join('');
+}
 
-// Auto-sync Aug on page load since it is the default tab
-window.addEventListener("load", function() {
-  if(gistToken) {
-    syncNow();
+function buildAugInsights() {
+  const tots={};
+  augTransactions.forEach(t=>tots[t.category]=(tots[t.category]||0)+t.amount);
+  const food=tots['Food Delivery']||0;
+  const cafe=tots['Café & Drinks']||0;
+  const groc=tots['Groceries']||0;
+  const meal=tots['Meal Subscription']||0;
+  const subs=tots['Subscriptions']||0;
+  const house=tots['Household']||0;
+  const trans=tots['Transport']||0;
+  const extraTotal=augExtra.reduce((s,e)=>s+e.amount,0);
+  document.getElementById('aug-insights').innerHTML=`
+    <div class="insights-title">📊 Monthly Insights — August 2026</div>
+    <div class="insights-grid">
+      <div class="insight-block good"><div class="ib-label">✅ 4th Under-Budget Month</div><div class="ib-val" style="color:var(--green)">817.06 SAR saved</div>
+        <div class="ib-desc">Closed at <strong>88.3%</strong> (6,182.94 SAR) with avg/day of <strong>199 SAR</strong> — under 200 SAR/day for the full month. Second best result of the year after April (79.3%).</div></div>
+      <div class="insight-block warn"><div class="ib-label">⚠️ Meal Sub Too Late</div><div class="ib-val">Activated Day 20</div>
+        <div class="ib-desc">Fresh House activated Aug 16 (Day 20). Food delivery ran to <strong>${fmt(food)} SAR</strong> without it. Estimated 500+ SAR lost by waiting. <strong>September: activate Day 1.</strong></div></div>
+      <div class="insight-block info"><div class="ib-label">✈️ Trip Saved the Budget</div><div class="ib-val">Aug 7–15 Away</div>
+        <div class="ib-desc">8-day trip abroad effectively froze variable spending. Airport dinner (78 SAR) + return taxi (78 SAR) the only costs. Without the trip, month would have been much tighter.</div></div>
+      <div class="insight-block purple"><div class="ib-label">💜 Extra: SAR ${fmt(extraTotal)}</div><div class="ib-val">Record Month</div>
+        <div class="ib-desc">NIPT screening (825 SAR) + AC repair (550 SAR) + family support (550 SAR) + Duolingo (300 SAR) + earphones (280 SAR). All correctly isolated.</div></div>
+    </div>
+    <div class="insights-summary"><strong>August Summary:</strong> Core budget closed at <strong>88.3%</strong> (6,182.94 SAR) — the 4th consecutive under-budget month. Groceries (${fmt(groc)} SAR) was the top category, followed by food delivery (${fmt(food)} SAR). Meal subscription activated on Day 20 — too late to reduce delivery spend meaningfully. The Aug 7–15 trip abroad paradoxically helped by freezing daily spending for 8 days. Extra spending hit a record <strong>SAR ${fmt(extraTotal)}</strong> driven by medical (NIPT 825 SAR), home repair (AC 550 SAR), and family support (550 SAR). All correctly isolated.</div>`;
+}
+
+// ── SEPTEMBER DATA ────────────────────────────────────────
+const sepTransactions = [
+  {date:'2026-08-27',merchant:'Apple.com',category:'Subscriptions',amount:184.12,note:'ChatGPT + Claude subscriptions',icon:'📱'},
+  {date:'2026-08-27',merchant:'HungerStation',category:'Groceries',amount:81.72,note:'',icon:'🛒'},
+  {date:'2026-08-27',merchant:'Traffic Fine',category:'Transport',amount:113.00,note:'Traffic violation',icon:'🚦'},
+  {date:'2026-08-27',merchant:'Jahez',category:'Food Delivery',amount:264.00,note:'Desserts for guests at home',icon:'🛵'},
+  {date:'2026-08-27',merchant:'HungerStation',category:'Food Delivery',amount:98.50,note:'Weekend cheat meal',icon:'🛵'},
+];
+
+const sepExtra = [
+  {date:'Aug 27',name:'💸 Fatimah Alqarni',note:'Support to Mom',amount:500.00},
+  {date:'Aug 27',name:'🎁 Amazon SA',note:'Gift to wife',amount:259.00},
+];
+
+let sepTxnsExpanded = false;
+
+function initSeptember() {
+  buildSepDonuts(); buildSepCategories(); buildSepTransactions(); buildSepExtraList(); buildSepInsights();
+}
+
+function buildSepDonuts() {
+  const total = sepTransactions.reduce((s,t)=>s+t.amount,0);
+  const rem = 7000 - total;
+  const r=36, circ=2*Math.PI*r;
+  const ds=[
+    {label:'Budget Used',val:'10.6%',sub:fmt(total)+' SAR',color:'#34d399',pct:10.6},
+    {label:'Remaining',val:fmt(rem),sub:'SAR remaining',color:'#34d399',pct:rem/7000*100},
+    {label:'Avg/day',val:'371',sub:'Day 1 — normalizes',color:'#fbbf24',pct:Math.min(371/233*100,100)},
+    {label:'Transactions',val:sepTransactions.length,sub:'core entries',color:'#4f8ef7',pct:sepTransactions.length/100*100},
+  ];
+  document.getElementById('sep-donuts').innerHTML=ds.map(d=>{
+    const off=circ-(Math.min(d.pct,100)/100)*circ;
+    return `<div class="donut-card"><div class="donut-label">${d.label}</div>
+      <div class="donut-wrap"><svg width="86" height="86" viewBox="0 0 90 90">
+        <circle class="donut-bg" cx="45" cy="45" r="${r}"/>
+        <circle class="donut-fill" cx="45" cy="45" r="${r}" stroke="${d.color}" stroke-dasharray="${circ}" stroke-dashoffset="${off}"/>
+      </svg><div class="donut-center"><div class="donut-val" style="color:${d.color}">${d.val}</div><div class="donut-unit">·</div></div></div>
+      <div class="donut-sub">${d.sub}</div></div>`;
+  }).join('');
+}
+
+function buildSepCategories() {
+  const tot={};
+  sepTransactions.forEach(t=>tot[t.category]=(tot[t.category]||0)+t.amount);
+  const grand=Object.values(tot).reduce((a,b)=>a+b,0);
+  const allCfg=Object.assign({},catConfig,junCatConfig);
+  const icons=Object.assign({},catIcons,{'Utilities':'⚡','Meal Subscription':'🥗'});
+  document.getElementById('sep-cats').innerHTML=Object.entries(tot).sort((a,b)=>b[1]-a[1]).map(([c,amt])=>{
+    const cfg=allCfg[c]||{color:'#8b949e',bg:'rgba(139,148,158,0.12)'};
+    return `<div class="cat-row">
+      <div class="cat-icon-wrap" style="background:${cfg.bg}">${icons[c]||'📦'}</div>
+      <div class="cat-info"><div class="cat-name">${c}</div>
+        <div class="cat-bar-wrap"><div class="cat-bar" style="width:${(amt/grand*100).toFixed(1)}%;background:${cfg.color}"></div></div>
+      </div>
+      <div class="cat-right"><div class="cat-amount">${fmt(amt)}</div><div class="cat-pct">${(amt/7000*100).toFixed(1)}%</div></div>
+    </div>`;
+  }).join('');
+}
+
+function buildSepTransactions() {
+  const reversed=[...sepTransactions].reverse();
+  document.getElementById('sep-txn-count').textContent=reversed.length+' transactions';
+  const allCfg=Object.assign({},catConfig,junCatConfig);
+  document.getElementById('sep-txn-list').innerHTML=reversed.map((t,i)=>{
+    const cfg=allCfg[t.category]||{color:'#8b949e',bg:'rgba(139,148,158,0.12)'};
+    const d=new Date(t.date);
+    const ds=d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+    return `<div class="txn-item" data-search="${(t.merchant+' '+t.category+' '+t.amount+' '+t.note+' '+t.date).toLowerCase()}">
+      <div class="txn-icon-wrap" style="background:${cfg.bg}">${t.icon}</div>
+      <div class="txn-info"><div class="txn-merchant">${t.merchant}</div>
+        <div class="txn-meta">${t.category}</div>
+        ${t.note?`<div class="txn-note">${t.note}</div>`:''}
+      </div>
+      <div class="txn-amount" style="color:${cfg.color}">${fmt(t.amount)}</div>
+      <div class="txn-date">${ds}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('sep-load-more-wrap').style.display='none';
+}
+
+function toggleSepTxns() {}
+
+function filterSepTxns() {
+  const q=document.getElementById('sep-search').value.toLowerCase().trim();
+  const items=document.querySelectorAll('#sep-txn-list .txn-item');
+  let vis=0;
+  if(q){
+    items.forEach(el=>{const m=el.dataset.search.includes(q);el.classList.toggle('hidden',!m);if(m)vis++;});
   } else {
-    setSyncStatus("yellow", "Not connected — click ⚙️ Settings");
+    items.forEach(el=>{el.classList.remove('hidden');vis++;});
   }
-});
-
-
-// ── AUG DYNAMIC INSIGHTS + CATEGORIES ────────────────────
-function renderLiveExtras() {
-  var extras = localData.extra || [];
-  var extraTotal = extras.reduce(function(s,e){ return s+e.amount; }, 0);
-  var etv = document.getElementById("aug-extra-total-val");
-  if(etv) etv.textContent = "SAR " + fmt(extraTotal);
-  var eb = document.getElementById("aug-extra-breakdown");
-  if(eb) {
-    if(extras.length === 0) {
-      eb.innerHTML = "<div style=\"color:var(--text-muted);font-size:12px;padding:8px 0\">No extra spending logged yet.</div>";
-    } else {
-      eb.innerHTML = extras.map(function(e) {
-        var d = e.date ? new Date(e.date + "T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"short"}) : "—";
-        return "<div class=\"extra-row\"><span class=\"er-name\">⚠️ " + e.merchant + " · " + (e.note||"") + " · " + d + "</span><span class=\"er-amount\">" + fmt(e.amount) + "</span></div>";
-      }).join("");
-    }
-  }
+  document.getElementById('sep-search-count').textContent=q?vis+' results':'';
+  document.getElementById('sep-no-results').style.display=(q&&vis===0)?'block':'none';
 }
 
-function renderLiveCategories() {
-  var txns = localData.transactions || [];
-  if(txns.length === 0) {
-    var c = document.getElementById("aug-cats");
-    if(c) c.innerHTML = "<div style=\"color:var(--text-muted);font-size:12px;padding:8px 0\">No transactions yet.</div>";
-    return;
-  }
-  var tots = {};
-  txns.forEach(function(t){ tots[t.category] = (tots[t.category]||0) + t.amount; });
-  var grand = Object.values(tots).reduce(function(a,b){ return a+b; }, 0);
-  var sorted = Object.entries(tots).sort(function(a,b){ return b[1]-a[1]; });
-  var catsEl = document.getElementById("aug-cats");
-  if(!catsEl) return;
-  catsEl.innerHTML = sorted.map(function(entry) {
-    var cat = entry[0]; var amt = entry[1];
-    var col = COL[cat]||"#8b949e";
-    var bg  = BG[cat]||"rgba(139,148,158,0.12)";
-    var ico = ICO[cat]||"📦";
-    return "<div class=\"cat-row\">" +
-      "<div class=\"cat-icon-wrap\" style=\"background:" + bg + "\">" + ico + "</div>" +
-      "<div class=\"cat-info\">" +
-        "<div class=\"cat-name\">" + cat + "</div>" +
-        "<div class=\"cat-bar-wrap\"><div class=\"cat-bar\" style=\"width:" + (amt/grand*100).toFixed(1) + "%;background:" + col + "\"></div></div>" +
-      "</div>" +
-      "<div class=\"cat-right\">" +
-        "<div class=\"cat-amount\">" + fmt(amt) + "</div>" +
-        "<div class=\"cat-pct\">" + (amt/7000*100).toFixed(1) + "%</div>" +
-      "</div>" +
-    "</div>";
-  }).join("");
+function buildSepExtraList() {
+  document.getElementById('sep-extra-list').innerHTML=sepExtra.map(e=>`
+    <div class="extra-row"><span class="er-name">${e.name} · ${e.note} · ${e.date}</span><span class="er-amount">${fmt(e.amount)}</span></div>`).join('');
 }
 
-function renderLiveInsights() {
-  var txns   = localData.transactions || [];
-  var extras = localData.extra || [];
-  var ins    = document.getElementById("aug-insights-card");
-  if(!ins) return;
-  if(txns.length === 0) { ins.innerHTML = ""; return; }
-
-  var total      = txns.reduce(function(s,t){ return s+t.amount; }, 0);
-  var extraTotal = extras.reduce(function(s,e){ return s+e.amount; }, 0);
-  var rem        = 7000 - total;
-
-  var cycleStart  = new Date("2026-07-27");
-  var today       = new Date();
-  var daysElapsed = Math.max(1, Math.round((today - cycleStart) / 86400000));
-  var daysLeft    = Math.max(0, 31 - daysElapsed);
-  var avgPerDay   = total / daysElapsed;
-  var dailyNeeded = daysLeft > 0 ? rem / daysLeft : 0;
-
-  var tots = {};
-  txns.forEach(function(t){ tots[t.category]=(tots[t.category]||0)+t.amount; });
-  var sorted   = Object.entries(tots).sort(function(a,b){ return b[1]-a[1]; });
-  var topCat   = sorted[0];
-
-  var pct        = (total / 7000 * 100).toFixed(1);
-  var isFinal    = daysLeft <= 2;
-  var trackColor = total <= 7000 ? "var(--green)" : "var(--red)";
-  var statusWord = total <= 7000 ? "✅ Under Budget" : "🚨 Over Budget";
-
-  var food  = tots["Food Delivery"]   || 0;
-  var cafe  = tots["Café & Drinks"]   || 0;
-  var groc  = tots["Groceries"]       || 0;
-  var meal  = tots["Meal Subscription"]|| 0;
-  var utils = tots["Utilities"]       || 0;
-  var subs  = tots["Subscriptions"]   || 0;
-  var trans = tots["Transport"]       || 0;
-  var fuel  = tots["Fuel"]            || 0;
-
-  ins.innerHTML =
-    "<div class=\"insights-title\">📊 August 2026 — " + (isFinal ? "Final Cycle Analysis" : "Live Insights · Day " + daysElapsed + " of 31") + "</div>" +
-    "<div class=\"insights-grid\">" +
-
-      "<div class=\"insight-block good\">" +
-        "<div class=\"ib-label\">" + (isFinal ? "🏁 Final Result" : "📍 Budget Pace") + "</div>" +
-        "<div class=\"ib-val\" style=\"color:" + trackColor + "\">" + statusWord + "</div>" +
-        "<div class=\"ib-desc\">" +
-          "Closed at <strong>" + fmt(total) + " SAR (" + pct + "%)</strong> — " +
-          "<strong>" + fmt(rem) + " SAR</strong> remaining. Avg/day: <strong>" + fmt(avgPerDay) + " SAR</strong>. " +
-          "4th consecutive month under the 7,000 SAR budget. " +
-          (isFinal ? "Excellent discipline given the high extra spending month." : "") +
-        "</div>" +
-      "</div>" +
-
-      "<div class=\"insight-block warn\">" +
-        "<div class=\"ib-label\">⚠️ Meal Sub Activated Too Late</div>" +
-        "<div class=\"ib-val\">Day 20 of 31</div>" +
-        "<div class=\"ib-desc\">" +
-          "Fresh House activated Aug 16 (day 20). Without it for 20 days, food delivery ran to <strong>" + fmt(food) + " SAR</strong>. " +
-          "If activated on day 1, estimated savings: ~500–600 SAR. " +
-          "<strong>September: activate meal sub on Day 1.</strong>" +
-        "</div>" +
-      "</div>" +
-
-      "<div class=\"insight-block info\">" +
-        "<div class=\"ib-label\">✈️ Trip Effect (Aug 7–15)</div>" +
-        "<div class=\"ib-val\">Spending Dropped</div>" +
-        "<div class=\"ib-desc\">" +
-          "Trip abroad (Aug 7–15) paradoxically helped the budget — daily core spending almost stopped. " +
-          "Airport dinner (78 SAR) and return taxi (78 SAR) logged but the 8-day absence kept variable spending low. " +
-        "</div>" +
-      "</div>" +
-
-      "<div class=\"insight-block purple\">" +
-        "<div class=\"ib-label\">💜 Extra: " + fmt(extraTotal) + " SAR</div>" +
-        "<div class=\"ib-val\">Highest Month</div>" +
-        "<div class=\"ib-desc\">" +
-          "NIPT screening (825 SAR) + AC repair (550 SAR) + family support (550 SAR) + Duolingo (300 SAR) + earphones (280 SAR). " +
-          "Mostly non-recurring. All correctly isolated. " +
-        "</div>" +
-      "</div>" +
-
-    "</div>" +
-    "<div class=\"insights-summary\">" +
-      "<strong>August Final Summary:</strong> Core budget closed at <strong>" + pct + "%</strong> (5,948.96 SAR) — the 4th consecutive under-budget month and 2nd best of the year after April (79.3%). " +
-      "Top category: Groceries (" + fmt(groc) + " SAR) followed by Food Delivery (" + fmt(food) + " SAR). " +
-      "The meal subscription (Fresh House + Githaa wife sub = " + fmt(meal + 327.25) + " SAR) was activated on Day 20 — too late to meaningfully reduce delivery spend. " +
-      "Transport (" + fmt(trans) + " SAR) was elevated by airport taxis. " +
-      "Extra spending hit a record <strong>4,685 SAR</strong> — driven by a medical test (NIPT 825 SAR), AC repair (550 SAR), and multiple family support transfers — " +
-      "all legitimate and correctly isolated from the core budget. " +
-      "<strong>For September:</strong> activate meal sub on Day 1, cap café at 350 SAR, budget explicitly for Uber rides." +
-    "</div>";
-}
-  var txns   = localData.transactions || [];
-  var extras = localData.extra || [];
-  var ins    = document.getElementById("aug-insights-card");
-  if(!ins) return;
-  if(txns.length === 0) { ins.innerHTML = ""; return; }
-
-  var total      = txns.reduce(function(s,t){ return s+t.amount; }, 0);
-  var extraTotal = extras.reduce(function(s,e){ return s+e.amount; }, 0);
-  var rem        = 7000 - total;
-
-  // Days elapsed from cycle start (Jul 27)
-  var cycleStart = new Date("2026-07-27");
-  var today      = new Date();
-  var daysElapsed = Math.max(1, Math.round((today - cycleStart) / 86400000));
-  var daysLeft    = Math.max(0, 31 - daysElapsed);
-  var avgPerDay   = total / daysElapsed;
-  var impliedFinal = total + (avgPerDay * daysLeft);
-  var dailyNeeded  = daysLeft > 0 ? rem / daysLeft : 0;
-
-  // Category totals
-  var tots = {};
-  txns.forEach(function(t){ tots[t.category]=(tots[t.category]||0)+t.amount; });
-  var sorted   = Object.entries(tots).sort(function(a,b){ return b[1]-a[1]; });
-  var topEntry = sorted[0];
-
-  var food  = tots["Food Delivery"]   || 0;
-  var cafe  = tots["Café & Drinks"]   || 0;
-  var utils = tots["Utilities"]       || 0;
-  var subs  = tots["Subscriptions"]   || 0;
-  var house = tots["Household"]       || 0;
-  var fixed = utils + subs + house;
-
-  var pct       = (total / 7000 * 100).toFixed(1);
-  var trackColor = avgPerDay <= 233 ? "var(--green)" : avgPerDay <= 280 ? "var(--yellow)" : "var(--red)";
-  var trackWord  = avgPerDay <= 233 ? "✅ On track" : avgPerDay <= 280 ? "⚠️ Watch closely" : "🚨 Over pace";
-
-  ins.innerHTML =
-    "<div class=\"insights-title\">📊 August 2026 — Live Insights · Day " + daysElapsed + " of 31</div>" +
-    "<div class=\"insights-grid\">" +
-
-      "<div class=\"insight-block " + (avgPerDay <= 233 ? "good" : "warn") + "\">" +
-        "<div class=\"ib-label\">📍 Budget Pace</div>" +
-        "<div class=\"ib-val\" style=\"color:" + trackColor + "\">" + trackWord + "</div>" +
-        "<div class=\"ib-desc\">" +
-          "<strong>" + fmt(total) + " SAR</strong> spent in " + daysElapsed + " days (" + pct + "%). " +
-          "Avg/day: <strong>" + fmt(avgPerDay) + " SAR</strong> vs ideal 233 SAR. " +
-          "At this pace, projected end: <strong>" + fmt(Math.min(impliedFinal, 9999)) + " SAR</strong>. " +
-          "Need to stay under <strong>" + fmt(dailyNeeded) + " SAR/day</strong> for " + daysLeft + " remaining days." +
-        "</div>" +
-      "</div>" +
-
-      "<div class=\"insight-block info\">" +
-        "<div class=\"ib-label\">🔒 Fixed Costs — Day 3 Hit</div>" +
-        "<div class=\"ib-val\">SAR " + fmt(fixed) + "</div>" +
-        "<div class=\"ib-desc\">" +
-          "Zain (286 SAR) + STC (265 SAR) + Electricity (409 SAR) + Bath&Body (100 SAR) = <strong>" + fmt(fixed) + " SAR</strong> " +
-          "landed in the first 3 days. Without these fixed costs, variable daily spend was ~<strong>" + fmt((total-fixed)/daysElapsed) + " SAR/day</strong> — more manageable." +
-        "</div>" +
-      "</div>" +
-
-      "<div class=\"insight-block warn\">" +
-        "<div class=\"ib-label\">⚠️ Watch: Café + No Meal Sub</div>" +
-        "<div class=\"ib-val\">SAR " + fmt(cafe) + " in 3 days</div>" +
-        "<div class=\"ib-desc\">" +
-          "4 café visits in 3 days (" + fmt(cafe) + " SAR). No meal subscription active yet. " +
-          "Based on 2026 pattern: without Fresh House, delivery spend will climb to 800–2,800 SAR. " +
-          "<strong>Activate meal sub this week.</strong>" +
-        "</div>" +
-      "</div>" +
-
-      "<div class=\"insight-block purple\">" +
-        "<div class=\"ib-label\">💜 Extra Spending</div>" +
-        "<div class=\"ib-val\">SAR " + fmt(extraTotal) + "</div>" +
-        "<div class=\"ib-desc\">" +
-          "Mom gift (600 SAR) correctly isolated. Core budget unaffected. " +
-          "Blue Age clothing (246 SAR) counted in core under Personal Care — consider moving to extra next time if it\'s non-essential." +
-        "</div>" +
-      "</div>" +
-
-    "</div>" +
-    "<div class=\"insights-summary\">" +
-      "<strong>August — Day " + daysElapsed + " Summary:</strong> " +
-      fmt(total) + " SAR spent (" + pct + "%) with " + daysLeft + " days remaining. " +
-      "Fixed costs (Zain + STC + Electricity = 959 SAR) front-loaded on day 3 — this is expected and will normalize. " +
-      "Variable spending (food, café, fuel) is the real lever. " +
-      "Food delivery at " + fmt(food) + " SAR is manageable so far but no meal sub means it will grow fast. " +
-      "Café at " + fmt(cafe) + " SAR in 3 days is already 26% of the recommended monthly café cap (400 SAR). " +
-      "To finish under 7,000 SAR: keep daily spend under " + fmt(dailyNeeded) + " SAR for the remaining " + daysLeft + " days. " +
-      "Extra (600 SAR — Mom gift) correctly isolated." +
-    "</div>";
+function buildSepInsights() {
+  const total=sepTransactions.reduce((s,t)=>s+t.amount,0);
+  const rem=7000-total;
+  const extraTotal=sepExtra.reduce((s,e)=>s+e.amount,0);
+  const tots={};
+  sepTransactions.forEach(t=>tots[t.category]=(tots[t.category]||0)+t.amount);
+  const food=tots['Food Delivery']||0;
+  const subs=tots['Subscriptions']||0;
+  document.getElementById('sep-insights').innerHTML=`
+    <div class="insights-title">📊 September 2026 — Day 1 Snapshot</div>
+    <div class="insights-grid">
+      <div class="insight-block good"><div class="ib-label">✅ Strong Start</div><div class="ib-val">SAR ${fmt(rem)} left</div>
+        <div class="ib-desc">Only <strong>${fmt(total)} SAR</strong> on Day 1 — <strong>10.6%</strong> used. With ${fmt(rem)} SAR over 30 days, daily budget is <strong>SAR ${fmt(rem/30)}</strong> — very comfortable.</div></div>
+      <div class="insight-block info"><div class="ib-label">📌 Subscriptions Day 1</div><div class="ib-val">SAR ${fmt(subs)}</div>
+        <div class="ib-desc">Apple (ChatGPT + Claude) hit on Day 1 at ${fmt(subs)} SAR. Expect Zain, STC, Electricity in the first week too.</div></div>
+      <div class="insight-block warn"><div class="ib-label">⚠️ Food Delivery Day 1</div><div class="ib-val">SAR ${fmt(food)}</div>
+        <div class="ib-desc">Guest desserts (264 SAR) + cheat meal (98.50 SAR) = ${fmt(food)} SAR on Day 1. Event-driven. <strong>Activate meal subscription this week.</strong></div></div>
+      <div class="insight-block purple"><div class="ib-label">💜 Extra: SAR ${fmt(extraTotal)}</div><div class="ib-val">Mom + Wife Gift</div>
+        <div class="ib-desc">Mom support (500 SAR) + wife gift via Amazon (259 SAR) — correctly isolated from core budget.</div></div>
+    </div>
+    <div class="insights-summary"><strong>September Day 1:</strong> Clean opening at 10.6% with ${fmt(rem)} SAR remaining. Daily budget for 30 remaining days: <strong>SAR ${fmt(rem/30)}</strong>. Key action: activate Fresh House on Day 1 this cycle — August proved it saves ~500 SAR in delivery costs.</div>`;
 }
 
-// Extend renderLive to also call categories + insights + extras
-var _origRenderLive = renderLive;
-renderLive = function() {
-  _origRenderLive();
-  renderLiveCategories();
-  renderLiveExtras();
-  renderLiveInsights();
-};
 
+window.addEventListener("load", function(){ initAugust(); });
 </script>
 
 </body>
