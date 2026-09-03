@@ -735,7 +735,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
         <div class="overview-left">
           <div class="ov-label">August 2026 · Core Budget <span style="color:var(--green);font-size:11px;margin-left:8px">✅ Closed</span></div>
           <div class="ov-amount" style="color:var(--yellow)"><span>SAR</span>6,182.94</div>
-          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 · Day 5 of 31</div>
+          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 · Day 8 of 31</div>
         </div>
         <div class="overview-pills">
           <div class="pill green"><span class="pill-label">Remaining</span><span class="pill-val">817.06 SAR</span></div>
@@ -780,18 +780,18 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <div class="overview-card">
       <div class="overview-top">
         <div class="overview-left">
-          <div class="ov-label">September 2026 · Core Budget <span style="color:var(--yellow);font-size:11px;margin-left:8px">📍 Day 5</span></div>
-          <div class="ov-amount" style="color:var(--yellow)"><span>SAR</span>2,514.64</div>
-          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 · Day 5 of 31</div>
+          <div class="ov-label">September 2026 · Core Budget <span style="color:var(--yellow);font-size:11px;margin-left:8px">📍 Day 8</span></div>
+          <div class="ov-amount" style="color:var(--yellow)"><span>SAR</span>3,627.33</div>
+          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 · Day 8 of 31</div>
         </div>
         <div class="overview-pills">
-          <div class="pill green"><span class="pill-label">Remaining</span><span class="pill-val">4,485.36 SAR</span></div>
-          <div class="pill yellow"><span class="pill-label">Avg/day</span><span class="pill-val">502.93 SAR</span></div>
-          <div class="pill"><span class="pill-label">Day</span><span class="pill-val">5 of 31</span></div>
+          <div class="pill green"><span class="pill-label">Remaining</span><span class="pill-val">3,372.67 SAR</span></div>
+          <div class="pill yellow"><span class="pill-label">Avg/day</span><span class="pill-val">453.42 SAR</span></div>
+          <div class="pill"><span class="pill-label">Day</span><span class="pill-val">8 of 31</span></div>
         </div>
       </div>
-      <div class="progress-track"><div class="progress-fill green" style="width:35.9%"></div></div>
-      <div class="progress-labels"><span>SAR 0</span><span class="pct">35.9% used</span><span>SAR 7,000</span></div>
+      <div class="progress-track"><div class="progress-fill green" style="width:51.8%"></div></div>
+      <div class="progress-labels"><span>SAR 0</span><span class="pct">51.8% used</span><span>SAR 7,000</span></div>
     </div>
     <div class="donuts-grid" id="sep-donuts"></div>
     <div class="search-wrap">
@@ -805,7 +805,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
         <div class="section-title">Extra Spending — Not Deducted from Budget</div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
           <span class="extra-badge">⚠️ Isolated</span>
-          <span class="extra-total-val" id="sep-extra-val">SAR 1,951.27</span>
+          <span class="extra-total-val" id="sep-extra-val">SAR 2,106.27</span>
         </div>
         <div id="sep-extra-list"></div>
       </div>
@@ -1253,7 +1253,7 @@ const ALL_MONTHS=[
   {key:'jun',label:'Jun',spent:6764.36,extra:5634.99,active:true,cycle:'May 24–Jun 27',days:35,avgDay:193.27,pct:96.6},
   {key:'jul',label:'Jul',spent:6496.84,extra:2118.41,active:true,txns:null},
   {key:'aug',label:'Aug',spent:6182.94,extra:4745.3,active:true,cycle:'Jul 27–Aug 26',days:31,avgDay:199.45,pct:88.3,overBudget:false,partial:false},
-  {key:'sep',label:'Sep',spent:2514.64,extra:1951.27,active:true,cycle:'Aug 27–Sep 26',days:31,avgDay:502.93,pct:35.9,overBudget:false,partial:true},
+  {key:'sep',label:'Sep',spent:3627.33,extra:2106.27,active:true,cycle:'Aug 27–Sep 26',days:31,avgDay:453.42,pct:51.8,overBudget:false,partial:true},
   {key:'oct',label:'Oct',spent:0,extra:0,active:false},
   {key:'nov',label:'Nov',spent:0,extra:0,active:false},
   {key:'dec',label:'Dec',spent:0,extra:0,active:false},
@@ -3031,10 +3031,10 @@ function buildAugInsights() {
 
 // ── SEPTEMBER DATA ────────────────────────────────────────
 const sepTransactions = [
-  {date:'2026-08-27',merchant:'Apple.com',category:'Subscriptions',amount:184.12,note:'ChatGPT + Claude subscriptions',icon:'📱'},
+  {date:'2026-08-27',merchant:'Apple.com',category:'Subscriptions',amount:184.12,note:'ChatGPT + Claude',icon:'📱'},
   {date:'2026-08-27',merchant:'HungerStation',category:'Groceries',amount:81.72,note:'',icon:'🛒'},
   {date:'2026-08-27',merchant:'Traffic Fine',category:'Transport',amount:113.00,note:'Traffic violation',icon:'🚦'},
-  {date:'2026-08-27',merchant:'Jahez',category:'Food Delivery',amount:264.00,note:'Desserts for guests at home',icon:'🛵'},
+  {date:'2026-08-27',merchant:'Jahez',category:'Food Delivery',amount:264.00,note:'Desserts for guests',icon:'🛵'},
   {date:'2026-08-27',merchant:'HungerStation',category:'Food Delivery',amount:98.50,note:'Weekend cheat meal',icon:'🛵'},
   {date:'2026-08-28',merchant:'Ninja Retail',category:'Groceries',amount:55.15,note:'',icon:'🛒'},
   {date:'2026-08-29',merchant:'Starbucks',category:'Café & Drinks',amount:24.00,note:'',icon:'☕'},
@@ -3042,24 +3042,38 @@ const sepTransactions = [
   {date:'2026-08-29',merchant:'HungerStation',category:'Groceries',amount:102.14,note:'',icon:'🛒'},
   {date:'2026-08-29',merchant:'HungerStation',category:'Food Delivery',amount:39.71,note:'Lunch',icon:'🛵'},
   {date:'2026-08-29',merchant:"Raising Cane's",category:'Dining Out',amount:46.00,note:'Lunch',icon:'🍳'},
-  {date:'2026-08-29',merchant:'Fresh House',category:'Meal Subscription',amount:1131.07,note:'Meals subscription 2 weeks',icon:'🥗'},
+  {date:'2026-08-29',merchant:'Fresh House',category:'Meal Subscription',amount:1131.07,note:'2 weeks meals',icon:'🥗'},
   {date:'2026-08-29',merchant:'Al Nahdi Pharmacy',category:'Health',amount:95.70,note:"Wife's meds",icon:'💊'},
   {date:'2026-08-30',merchant:'SPAR Store',category:'Groceries',amount:25.95,note:'Gum',icon:'🛒'},
   {date:'2026-08-30',merchant:'HungerStation',category:'Food Delivery',amount:45.58,note:'',icon:'🛵'},
   {date:'2026-08-30',merchant:'VOX Cinemas',category:'Entertainment',amount:108.00,note:'Family fun',icon:'🎬'},
+  {date:'2026-09-01',merchant:'SPAR Store',category:'Groceries',amount:4.95,note:'Snack',icon:'🛒'},
+  {date:'2026-09-02',merchant:'Ninja Retail',category:'Groceries',amount:53.65,note:'',icon:'🛒'},
+  {date:'2026-09-02',merchant:'Saudi Electricity',category:'Utilities',amount:413.16,note:'Monthly electricity bill',icon:'⚡'},
+  {date:'2026-09-02',merchant:'Zain',category:'Utilities',amount:286.35,note:'Monthly internet bill',icon:'⚡'},
+  {date:'2026-09-02',merchant:'STC Postpaid',category:'Subscriptions',amount:286.35,note:'Monthly phone bill',icon:'📱'},
+  {date:'2026-09-02',merchant:'Easy Parking',category:'Transport',amount:9.20,note:'',icon:'🅿️'},
+  {date:'2026-09-03',merchant:'HungerStation',category:'Food Delivery',amount:59.03,note:'Breakfast',icon:'🛵'},
 ];
+
+
 
 const sepExtra = [
   {date:'Aug 27',name:'💸 Fatimah Alqarni',note:'Support to Mom',amount:500.00},
   {date:'Aug 27',name:'🎁 Amazon SA',note:'Gift to wife',amount:259.00},
   {date:'Aug 28',name:'🛵 HungerStation',note:'Wife guests event food',amount:53.46},
-  {date:'Aug 28',name:'💐 Raqat Mashaair',note:'Wife event',amount:70.00},
+  {date:'Aug 28',name:'💐 Raqat Mashaair',note:'Wife event flowers',amount:70.00},
   {date:'Aug 28',name:'🛵 HungerStation',note:'Wife event food',amount:58.52},
   {date:'Aug 29',name:'🥩 Ahmed Alqarni',note:'7Ribs dinner for friend',amount:360.29},
   {date:'Aug 31',name:'🏥 SCFHS',note:'Cardiology board exam fee',amount:120.00},
   {date:'Aug 31',name:'👕 Tommy Hilfiger',note:"Gift for friend's newborn",amount:210.00},
   {date:'Aug 31',name:'👕 NEXT',note:"Gift for friend's child",amount:320.00},
+  {date:'Aug 31',name:'💐 Raqat Mashaair',note:'Flower bouquet for friend',amount:75.00},
+  {date:'Sep 1',name:'☕ Flame Roast',note:'Coffee with friend at work',amount:32.00},
+  {date:'Sep 2',name:'🍽️ Saudi Medi',note:'Lunch with friend',amount:48.00},
 ];
+
+
 
 let sepTxnsExpanded = false;
 
