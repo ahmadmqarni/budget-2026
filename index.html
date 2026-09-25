@@ -735,7 +735,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
         <div class="overview-left">
           <div class="ov-label">August 2026 · Core Budget <span style="color:var(--green);font-size:11px;margin-left:8px">✅ Closed</span></div>
           <div class="ov-amount" style="color:var(--yellow)"><span>SAR</span>6,182.94</div>
-          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 · Day 26 of 31</div>
+          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 · Day 30 — Closed</div>
         </div>
         <div class="overview-pills">
           <div class="pill green"><span class="pill-label">Remaining</span><span class="pill-val">817.06 SAR</span></div>
@@ -780,18 +780,18 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <div class="overview-card">
       <div class="overview-top">
         <div class="overview-left">
-          <div class="ov-label">September 2026 · Core Budget <span style="color:var(--yellow);font-size:11px;margin-left:8px">🔴 Day 26</span></div>
-          <div class="ov-amount" style="color:var(--red)"><span>SAR</span>6,980.63</div>
-          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 · Day 26 of 31</div>
+          <div class="ov-label">September 2026 · Core Budget <span style="color:var(--yellow);font-size:11px;margin-left:8px">🔴 Closed</span></div>
+          <div class="ov-amount" style="color:var(--red)"><span>SAR</span>7,084.99</div>
+          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 · Day 30 — Closed</div>
         </div>
         <div class="overview-pills">
           <div class="pill green"><span class="pill-label">Remaining</span><span class="pill-val">538.53 SAR</span></div>
-          <div class="pill yellow"><span class="pill-label">Avg/day</span><span class="pill-val">268.49 SAR</span></div>
-          <div class="pill"><span class="pill-label">Day</span><span class="pill-val">26 of 31</span></div>
+          <div class="pill yellow"><span class="pill-label">Avg/day</span><span class="pill-val">236.17 SAR</span></div>
+          <div class="pill"><span class="pill-label">Day</span><span class="pill-val">31 of 31</span></div>
         </div>
       </div>
-      <div class="progress-track"><div class="progress-fill green" style="width:99.7%"></div></div>
-      <div class="progress-labels"><span>SAR 0</span><span class="pct" style="color:var(--red)">99.7% used — 19 SAR left</span><span>SAR 7,000</span></div>
+      <div class="progress-track"><div class="progress-fill green" style="width:100%"></div></div>
+      <div class="progress-labels"><span>SAR 0</span><span class="pct" style="color:var(--red)">101.2% — Over by 84.99 SAR</span><span>SAR 7,000</span></div>
     </div>
     <div class="donuts-grid" id="sep-donuts"></div>
     <div class="search-wrap">
@@ -805,7 +805,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
         <div class="section-title">Extra Spending — Not Deducted from Budget</div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
           <span class="extra-badge">⚠️ Isolated</span>
-          <span class="extra-total-val" id="sep-extra-val">SAR 4,787.55</span>
+          <span class="extra-total-val" id="sep-extra-val">SAR 5,161.84</span>
         </div>
         <div id="sep-extra-list"></div>
       </div>
@@ -1253,7 +1253,7 @@ const ALL_MONTHS=[
   {key:'jun',label:'Jun',spent:6764.36,extra:5634.99,active:true,cycle:'May 24–Jun 27',days:35,avgDay:193.27,pct:96.6},
   {key:'jul',label:'Jul',spent:6496.84,extra:2118.41,active:true,txns:null},
   {key:'aug',label:'Aug',spent:6182.94,extra:4745.3,active:true,cycle:'Jul 27–Aug 26',days:31,avgDay:199.45,pct:88.3,overBudget:false,partial:false},
-  {key:'sep',label:'Sep',spent:6980.63,extra:4787.55,active:true,cycle:'Aug 27–Sep 26',days:31,avgDay:268.49,pct:99.7,overBudget:false,partial:true},
+  {key:'sep',label:'Sep',spent:7084.99,extra:5161.84,active:true,cycle:'Aug 27–Sep 26',days:31,avgDay:236.17,pct:101.2,overBudget:true,partial:false},
   {key:'oct',label:'Oct',spent:0,extra:0,active:false},
   {key:'nov',label:'Nov',spent:0,extra:0,active:false},
   {key:'dec',label:'Dec',spent:0,extra:0,active:false},
@@ -3094,6 +3094,9 @@ const sepTransactions = [
   {date:'2026-09-16',merchant:'Modhlah Co',category:'Café & Drinks',amount:31.00,note:'Coffee at work',icon:'☕'},
   {date:'2026-09-16',merchant:'Al Hoj Est',category:'Groceries',amount:17.80,note:'Snack at work',icon:'🛒'},
   {date:'2026-09-16',merchant:'Easy Parking',category:'Transport',amount:57.50,note:'VIP parking at work',icon:'🅿️'},
+  {date:'2026-09-24',merchant:'Football Game',category:'Entertainment',amount:30.00,note:'Football game',icon:'⚽'},
+  {date:'2026-09-25',merchant:'Apple.com',category:'Subscriptions',amount:13.29,note:'iCloud subscription',icon:'📱'},
+  {date:'2026-09-25',merchant:'HungerStation',category:'Food Delivery',amount:60.07,note:'Morning breakfast',icon:'🛵'},
 ];
 
 
@@ -3129,6 +3132,16 @@ const sepExtra = [
   {date:'Sep 20',name:'☕ Java Cafe',note:'On-call snack',amount:17.00},
   {date:'Sep 21',name:'☕ Modhlah Co',note:'Coffee at work',amount:31.00},
   {date:'Sep 21',name:'🅿️ Easy Parking',note:'Parking',amount:20.70},
+  {date:'Sep 22',name:'☕ Modhlah Co',note:'Coffee at work',amount:12.00},
+  {date:'Sep 22',name:'🚗 Uber',note:'',amount:79.98},
+  {date:'Sep 22',name:'☕ Modhlah Co',note:'Coffee at work',amount:17.00},
+  {date:'Sep 22',name:'🅿️ Easy Parking',note:'',amount:23.00},
+  {date:'Sep 22',name:'🍽️ Watan Food',note:'Lunch after work',amount:20.00},
+  {date:'Sep 23',name:'📱 Apple.com',note:'Subscriptions',amount:92.06},
+  {date:'Sep 23',name:'🛵 HungerStation',note:'Cheat dinner',amount:37.50},
+  {date:'Sep 24',name:'🅿️ Easy Parking',note:'',amount:9.20},
+  {date:'Sep 24',name:'🏥 Shamal Alriyadh',note:"Father's healthcare",amount:53.55},
+  {date:'Sep 24',name:'🏥 Asharq Alawsat',note:"Father's healthcare",amount:30.00},
 ];
 
 
