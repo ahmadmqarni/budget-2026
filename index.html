@@ -437,7 +437,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <button class="month-tab has-data" onclick="showMonth('jul',this)">Jul</button>
     <button class="month-tab has-data active" onclick="showMonth('aug',this)">Aug ●</button>
     <button class="month-tab has-data" onclick="showMonth('sep',this)">Sep</button>
-    <button class="month-tab" onclick="showMonth('oct',this)">Oct</button>
+    <button class="month-tab has-data active" onclick="showMonth('oct',this)">Oct</button>
     <button class="month-tab" onclick="showMonth('nov',this)">Nov</button>
     <button class="month-tab" onclick="showMonth('dec',this)">Dec</button>
     <button class="month-tab overview-tab" onclick="showMonth('overview',this)">2026 Overview</button>
@@ -729,13 +729,13 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     </div>
     <div class="insights-card" id="jun-insights"></div>
   </div>
-  <div id="panel-aug" class="month-panel active">
+  <div id="panel-aug" class="month-panel">
     <div class="overview-card">
       <div class="overview-top">
         <div class="overview-left">
           <div class="ov-label">August 2026 · Core Budget <span style="color:var(--green);font-size:11px;margin-left:8px">✅ Closed</span></div>
           <div class="ov-amount" style="color:var(--yellow)"><span>SAR</span>6,182.94</div>
-          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 · Day 30 — Closed</div>
+          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 · Closed</div>
         </div>
         <div class="overview-pills">
           <div class="pill green"><span class="pill-label">Remaining</span><span class="pill-val">817.06 SAR</span></div>
@@ -781,17 +781,17 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
       <div class="overview-top">
         <div class="overview-left">
           <div class="ov-label">September 2026 · Core Budget <span style="color:var(--yellow);font-size:11px;margin-left:8px">🔴 Closed</span></div>
-          <div class="ov-amount" style="color:var(--red)"><span>SAR</span>7,084.99</div>
-          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 · Day 30 — Closed</div>
+          <div class="ov-amount" style="color:var(--red)"><span>SAR</span>7,569.32</div>
+          <div class="ov-sub">of 7,000 SAR · Cycle: Aug 27 – Sep 26 · Closed</div>
         </div>
         <div class="overview-pills">
           <div class="pill green"><span class="pill-label">Remaining</span><span class="pill-val">538.53 SAR</span></div>
-          <div class="pill yellow"><span class="pill-label">Avg/day</span><span class="pill-val">236.17 SAR</span></div>
+          <div class="pill yellow"><span class="pill-label">Avg/day</span><span class="pill-val">244.17 SAR</span></div>
           <div class="pill"><span class="pill-label">Day</span><span class="pill-val">31 of 31</span></div>
         </div>
       </div>
       <div class="progress-track"><div class="progress-fill green" style="width:100%"></div></div>
-      <div class="progress-labels"><span>SAR 0</span><span class="pct" style="color:var(--red)">101.2% — Over by 84.99 SAR</span><span>SAR 7,000</span></div>
+      <div class="progress-labels"><span>SAR 0</span><span class="pct" style="color:var(--red)">108.1% — Over by 569.32 SAR</span><span>SAR 7,000</span></div>
     </div>
     <div class="donuts-grid" id="sep-donuts"></div>
     <div class="search-wrap">
@@ -805,7 +805,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
         <div class="section-title">Extra Spending — Not Deducted from Budget</div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
           <span class="extra-badge">⚠️ Isolated</span>
-          <span class="extra-total-val" id="sep-extra-val">SAR 5,161.84</span>
+          <span class="extra-total-val" id="sep-extra-val">SAR 6,161.84</span>
         </div>
         <div id="sep-extra-list"></div>
       </div>
@@ -823,7 +823,66 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     </div>
     <div class="insights-card" id="sep-insights"></div>
   </div>
-  <div id="panel-oct" class="month-panel"><div class="empty-state"><div class="es-icon">📭</div><h3>October — Not started</h3><p></p></div></div>
+  <div id="panel-oct" class="month-panel active">
+    <div class="overview-card">
+      <div class="overview-top">
+        <div class="overview-left">
+          <div class="ov-label">October 2026 · Core Budget <span style="color:var(--green);font-size:11px;margin-left:8px">🟢 Day 1</span></div>
+          <div class="ov-amount" style="color:var(--green)"><span>SAR</span>0.00</div>
+          <div class="ov-sub">of 7,000 SAR · Cycle: Sep 27 – Oct 26 (30 days)</div>
+        </div>
+        <div class="overview-pills">
+          <div class="pill green"><span class="pill-label">Remaining</span><span class="pill-val">7,000.00 SAR</span></div>
+          <div class="pill green"><span class="pill-label">Avg/day</span><span class="pill-val">233.33 SAR</span></div>
+          <div class="pill"><span class="pill-label">Day</span><span class="pill-val">1 of 30</span></div>
+        </div>
+      </div>
+      <div class="progress-track"><div class="progress-fill green" style="width:0%"></div></div>
+      <div class="progress-labels"><span>SAR 0</span><span class="pct">0% used — fresh start!</span><span>SAR 7,000</span></div>
+    </div>
+    <div class="donuts-grid" id="oct-donuts"></div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" type="text" id="oct-search" placeholder="Search October transactions..." oninput="filterOctTxns()">
+      <span class="search-count" id="oct-search-count"></span>
+    </div>
+    <div class="two-col">
+      <div class="section-card"><div class="section-title">Spending by Category</div><div id="oct-cats"></div></div>
+      <div class="section-card">
+        <div class="section-title">Extra Spending — Not Deducted from Budget</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <span class="extra-badge">⚠️ Isolated</span>
+          <span class="extra-total-val" id="oct-extra-val">SAR 0.00</span>
+        </div>
+        <div id="oct-extra-list"><div style="color:var(--text-muted);font-size:12px;padding:8px 0">No extra spending yet.</div></div>
+      </div>
+    </div>
+    <div class="txn-list-wrap">
+      <div class="txn-list-header">
+        <div class="section-title" style="margin:0">All Transactions</div>
+        <span style="font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace" id="oct-txn-count">0 transactions</span>
+      </div>
+      <div id="oct-txn-list">
+        <div class="live-empty" style="text-align:center;padding:48px 20px;color:var(--text-muted)">
+          <div style="font-size:40px;margin-bottom:12px">📭</div>
+          <h3 style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px">No transactions yet</h3>
+          <p style="font-size:12px">Send your first October receipt to get started.</p>
+        </div>
+      </div>
+      <div class="no-results" id="oct-no-results" style="display:none">No transactions match your search.</div>
+    </div>
+    <div class="insights-card" id="oct-insights">
+      <div class="insights-title">📊 October 2026 — Ready to Start</div>
+      <div class="insights-summary">
+        <strong>October cycle opens Sep 27 – Oct 26.</strong> Budget: 7,000 SAR · Daily target: 233 SAR/day.<br><br>
+        <strong>Key targets from September learnings:</strong><br>
+        🥗 Activate meal subscription on Day 1 (Sep learned the hard way)<br>
+        ☕ Cap café at 350 SAR/month<br>
+        💊 Budget 400 SAR for healthcare (recurring for wife)<br>
+        💸 Plan family support transfers in advance
+      </div>
+    </div>
+  </div>
   <div id="panel-nov" class="month-panel"><div class="empty-state"><div class="es-icon">📭</div><h3>November — Not started</h3><p></p></div></div>
   <div id="panel-dec" class="month-panel"><div class="empty-state"><div class="es-icon">📭</div><h3>December — Not started</h3><p></p></div></div>
 
@@ -936,6 +995,7 @@ function showMonth(m,el){
   if(m==='aug' && !document.getElementById('aug-donuts').children.length) initAugust();
   if(m==='jun' && !document.getElementById('jun-donuts').children.length) initJune();
   if(m==='sep' && !document.getElementById('sep-donuts').children.length) initSeptember();
+  if(m==='oct') initOctober();
   if(m==='jan' && !document.getElementById('jan-donuts').children.length) initJanuary();
   if(m==='feb' && !document.getElementById('feb-donuts').children.length) initFebruary();
   if(m==='mar' && !document.getElementById('mar-donuts').children.length) initMarch();
@@ -1253,8 +1313,8 @@ const ALL_MONTHS=[
   {key:'jun',label:'Jun',spent:6764.36,extra:5634.99,active:true,cycle:'May 24–Jun 27',days:35,avgDay:193.27,pct:96.6},
   {key:'jul',label:'Jul',spent:6496.84,extra:2118.41,active:true,txns:null},
   {key:'aug',label:'Aug',spent:6182.94,extra:4745.3,active:true,cycle:'Jul 27–Aug 26',days:31,avgDay:199.45,pct:88.3,overBudget:false,partial:false},
-  {key:'sep',label:'Sep',spent:7084.99,extra:5161.84,active:true,cycle:'Aug 27–Sep 26',days:31,avgDay:236.17,pct:101.2,overBudget:true,partial:false},
-  {key:'oct',label:'Oct',spent:0,extra:0,active:false},
+  {key:'sep',label:'Sep',spent:7569.32,extra:6161.84,active:true,cycle:'Aug 27–Sep 26',days:31,avgDay:244.17,pct:108.1,overBudget:true,partial:false},
+  {key:'oct',label:'Oct',spent:0,extra:0,active:true,cycle:'Sep 27–Oct 26',days:30,avgDay:0,pct:0,overBudget:false,partial:true},
   {key:'nov',label:'Nov',spent:0,extra:0,active:false},
   {key:'dec',label:'Dec',spent:0,extra:0,active:false},
 ];
@@ -3097,6 +3157,13 @@ const sepTransactions = [
   {date:'2026-09-24',merchant:'Football Game',category:'Entertainment',amount:30.00,note:'Football game',icon:'⚽'},
   {date:'2026-09-25',merchant:'Apple.com',category:'Subscriptions',amount:13.29,note:'iCloud subscription',icon:'📱'},
   {date:'2026-09-25',merchant:'HungerStation',category:'Food Delivery',amount:60.07,note:'Morning breakfast',icon:'🛵'},
+  {date:'2026-09-25',merchant:'HungerStation',category:'Food Delivery',amount:156.90,note:'Sweets for family visit',icon:'🛵'},
+  {date:'2026-09-25',merchant:'HungerStation',category:'Groceries',amount:129.93,note:'',icon:'🛒'},
+  {date:'2026-09-25',merchant:'Scale',category:'Café & Drinks',amount:15.00,note:'Coffee on the road',icon:'☕'},
+  {date:'2026-09-26',merchant:'Starbucks',category:'Café & Drinks',amount:19.00,note:'Coffee on the road',icon:'☕'},
+  {date:'2026-09-26',merchant:'Gulf Company',category:'Fuel',amount:110.00,note:'Car gas',icon:'⛽'},
+  {date:'2026-09-26',merchant:'Falafel Al...',category:'Dining Out',amount:16.00,note:'Weekend breakfast',icon:'🍳'},
+  {date:'2026-09-26',merchant:'HungerStation',category:'Food Delivery',amount:37.50,note:'Late night dinner',icon:'🛵'},
 ];
 
 
@@ -3142,6 +3209,7 @@ const sepExtra = [
   {date:'Sep 24',name:'🅿️ Easy Parking',note:'',amount:9.20},
   {date:'Sep 24',name:'🏥 Shamal Alriyadh',note:"Father's healthcare",amount:53.55},
   {date:'Sep 24',name:'🏥 Asharq Alawsat',note:"Father's healthcare",amount:30.00},
+  {date:'Sep 16',name:'💍 Wedding Gift',note:"Gift for friend's wedding",amount:1000.00},
 ];
 
 
@@ -3256,7 +3324,98 @@ function buildSepInsights() {
 }
 
 
-window.addEventListener("load", function(){ initAugust(); });
+window.addEventListener("load", function(){ initOctober(); });
+
+// ── OCTOBER DATA ──────────────────────────────────────────
+const octTransactions = [];
+const octExtra = [];
+let octTxnsExpanded = false;
+
+function initOctober() {
+  buildOctDonuts(); buildOctCategories(); buildOctTransactions(); buildOctExtraList();
+}
+
+function buildOctDonuts() {
+  const total = octTransactions.reduce((s,t)=>s+t.amount,0);
+  const rem = 7000 - total;
+  const r=36, circ=2*Math.PI*r;
+  const pct = total/7000*100;
+  const col = pct<80?'#34d399':pct<95?'#fbbf24':'#f87171';
+  const ds=[
+    {label:'Budget Used',val:pct.toFixed(1)+'%',sub:fmt(total)+' SAR',color:col,pct:Math.min(pct,100)},
+    {label:'Remaining',val:fmt(rem),sub:'SAR remaining',color:'#34d399',pct:Math.max(0,rem/7000*100)},
+    {label:'Avg/day',val:total>0?fmt(total/Math.max(1,Math.round((new Date()-new Date('2026-09-27'))/86400000))):'—',sub:'SAR per day',color:'#fbbf24',pct:50},
+    {label:'Transactions',val:octTransactions.length,sub:'core entries',color:'#4f8ef7',pct:Math.min(octTransactions.length/100*100,100)},
+  ];
+  document.getElementById('oct-donuts').innerHTML=ds.map(d=>{
+    const off=circ-(Math.min(d.pct,100)/100)*circ;
+    return `<div class="donut-card"><div class="donut-label">${d.label}</div>
+      <div class="donut-wrap"><svg width="86" height="86" viewBox="0 0 90 90">
+        <circle class="donut-bg" cx="45" cy="45" r="${r}"/>
+        <circle class="donut-fill" cx="45" cy="45" r="${r}" stroke="${d.color}" stroke-dasharray="${circ}" stroke-dashoffset="${off}"/>
+      </svg><div class="donut-center"><div class="donut-val" style="color:${d.color}">${d.val}</div><div class="donut-unit">·</div></div></div>
+      <div class="donut-sub">${d.sub}</div></div>`;
+  }).join('');
+}
+
+function buildOctCategories() {
+  const tot={};
+  octTransactions.forEach(t=>tot[t.category]=(tot[t.category]||0)+t.amount);
+  if(Object.keys(tot).length===0){
+    document.getElementById('oct-cats').innerHTML='<div style="color:var(--text-muted);font-size:12px;padding:8px 0">No transactions yet.</div>';
+    return;
+  }
+  const grand=Object.values(tot).reduce((a,b)=>a+b,0);
+  const allCfg=Object.assign({},catConfig,junCatConfig,{'Meal Subscription':{color:'#10b981',bg:'rgba(16,185,129,0.12)'}});
+  const icons=Object.assign({},catIcons,{'Utilities':'⚡','Meal Subscription':'🥗'});
+  document.getElementById('oct-cats').innerHTML=Object.entries(tot).sort((a,b)=>b[1]-a[1]).map(([c,amt])=>{
+    const cfg=allCfg[c]||{color:'#8b949e',bg:'rgba(139,148,158,0.12)'};
+    return `<div class="cat-row"><div class="cat-icon-wrap" style="background:${cfg.bg}">${icons[c]||'📦'}</div>
+      <div class="cat-info"><div class="cat-name">${c}</div>
+        <div class="cat-bar-wrap"><div class="cat-bar" style="width:${(amt/grand*100).toFixed(1)}%;background:${cfg.color}"></div></div>
+      </div><div class="cat-right"><div class="cat-amount">${fmt(amt)}</div><div class="cat-pct">${(amt/7000*100).toFixed(1)}%</div></div></div>`;
+  }).join('');
+}
+
+function buildOctTransactions() {
+  const reversed=[...octTransactions].reverse();
+  document.getElementById('oct-txn-count').textContent=reversed.length+' transactions';
+  if(reversed.length===0) return;
+  const allCfg=Object.assign({},catConfig,junCatConfig,{'Meal Subscription':{color:'#10b981',bg:'rgba(16,185,129,0.12)'}});
+  document.getElementById('oct-txn-list').innerHTML=reversed.map((t,i)=>{
+    const cfg=allCfg[t.category]||{color:'#8b949e',bg:'rgba(139,148,158,0.12)'};
+    const d=new Date(t.date);
+    const ds=d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+    const collapsed=i>=5?'collapsed':'';
+    return `<div class="txn-item ${collapsed}" data-search="${(t.merchant+' '+t.category+' '+t.amount+' '+(t.note||'')+' '+t.date).toLowerCase()}">
+      <div class="txn-icon-wrap" style="background:${cfg.bg}">${t.icon}</div>
+      <div class="txn-info"><div class="txn-merchant">${t.merchant}</div>
+        <div class="txn-meta">${t.category}</div>${t.note?`<div class="txn-note">${t.note}</div>`:''}
+      </div><div class="txn-amount" style="color:${cfg.color}">${fmt(t.amount)}</div>
+      <div class="txn-date">${ds}</div></div>`;
+  }).join('');
+}
+
+function filterOctTxns() {
+  const q=document.getElementById('oct-search').value.toLowerCase().trim();
+  const items=document.querySelectorAll('#oct-txn-list .txn-item');
+  let vis=0;
+  if(q){items.forEach(el=>{el.classList.remove('collapsed');const m=el.dataset.search.includes(q);el.classList.toggle('hidden',!m);if(m)vis++;});}
+  else{items.forEach((el,i)=>{el.classList.remove('hidden');if(i>=5&&!octTxnsExpanded)el.classList.add('collapsed');vis++;});}
+  document.getElementById('oct-search-count').textContent=q?vis+' results':'';
+  document.getElementById('oct-no-results').style.display=(q&&vis===0)?'block':'none';
+}
+
+function buildOctExtraList() {
+  const extraTotal=octExtra.reduce((s,e)=>s+e.amount,0);
+  const etv=document.getElementById('oct-extra-val');
+  if(etv) etv.textContent='SAR '+fmt(extraTotal);
+  const eb=document.getElementById('oct-extra-list');
+  if(!eb) return;
+  if(octExtra.length===0){eb.innerHTML='<div style="color:var(--text-muted);font-size:12px;padding:8px 0">No extra spending yet.</div>';return;}
+  eb.innerHTML=octExtra.map(e=>`<div class="extra-row"><span class="er-name">${e.name} · ${e.note} · ${e.date}</span><span class="er-amount">${fmt(e.amount)}</span></div>`).join('');
+}
+
 </script>
 
 </body>
