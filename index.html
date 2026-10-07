@@ -3394,7 +3394,57 @@ const octExtra = [
 let octTxnsExpanded = false;
 
 function initOctober() {
-  buildOctDonuts(); buildOctCategories(); buildOctTransactions(); buildOctExtraList();
+  buildOctOverview(); buildOctDonuts(); buildOctCategories(); buildOctTransactions(); buildOctExtraList();
+}
+
+function buildOctOverview() {
+  const total = octTransactions.reduce((s,t)=>s+t.amount,0);
+  const rem = 7000 - total;
+  const cycleStart = new Date('2026-09-27');
+  const today = new Date();
+  const dayNum = Math.max(1, Math.min(30, Math.round((today - cycleStart)/86400000) + 1));
+  const pct = total/7000*100;
+  const avgDay = total > 0 ? total / Math.max(1, dayNum - 1 || 1) : 0;
+  const color = pct < 80 ? 'var(--green)' : pct < 100 ? '#fbbf24' : '#f87171';
+  const fillColor = pct < 80 ? 'green' : pct < 100 ? 'yellow' : 'red';
+  const overBudget = total > 7000;
+
+  // hero number
+  const amtEl = document.querySelector('#panel-oct .ov-amount');
+  if(amtEl) { amtEl.style.color = color; amtEl.innerHTML = `<span>SAR</span>${fmt(total)}`; }
+
+  // label — update day indicator
+  const labelEl = document.querySelector('#panel-oct .ov-label');
+  if(labelEl) {
+    const dot = overBudget ? '🔴 CLOSED' : `🟢 Day ${dayNum}`;
+    const dotColor = overBudget ? '#f87171' : 'var(--green)';
+    labelEl.innerHTML = `October 2026 · Core Budget <span style="color:${dotColor};font-size:11px;margin-left:8px">${dot}</span>`;
+  }
+
+  // sub line
+  const subEl = document.querySelector('#panel-oct .ov-sub');
+  if(subEl) subEl.textContent = overBudget ? 'of 7,000 SAR · Cycle: Sep 27 – Oct 26 · Closed' : `of 7,000 SAR · Cycle: Sep 27 – Oct 26 (30 days)`;
+
+  // pills
+  const pills = document.querySelectorAll('#panel-oct .pill');
+  if(pills.length >= 3) {
+    pills[0].querySelector('.pill-val').textContent = fmt(Math.abs(rem)) + (rem < 0 ? ' SAR over' : ' SAR');
+    pills[0].className = 'pill ' + (rem >= 0 ? 'green' : 'red');
+    pills[1].querySelector('.pill-val').textContent = fmt(avgDay) + ' SAR';
+    pills[1].className = 'pill ' + (avgDay > 280 ? 'yellow' : 'green');
+    pills[2].querySelector('.pill-val').textContent = `${dayNum} of 30`;
+  }
+
+  // progress bar
+  const fill = document.querySelector('#panel-oct .progress-fill');
+  if(fill) { fill.style.width = Math.min(pct,100)+'%'; fill.className = 'progress-fill '+fillColor; }
+
+  // progress labels
+  const pctLabel = document.querySelector('#panel-oct .pct');
+  if(pctLabel) {
+    if(overBudget) pctLabel.innerHTML = `<span style="color:#f87171">${pct.toFixed(1)}% — Over by ${fmt(total-7000)} SAR</span>`;
+    else pctLabel.textContent = `${pct.toFixed(1)}% used`;
+  }
 }
 
 function buildOctDonuts() {
