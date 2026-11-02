@@ -437,8 +437,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     <button class="month-tab has-data" onclick="showMonth('jul',this)">Jul</button>
     <button class="month-tab has-data active" onclick="showMonth('aug',this)">Aug ●</button>
     <button class="month-tab has-data" onclick="showMonth('sep',this)">Sep</button>
-    <button class="month-tab has-data active" onclick="showMonth('oct',this)">Oct</button>
-    <button class="month-tab" onclick="showMonth('nov',this)">Nov</button>
+    <button class="month-tab has-data" onclick="showMonth('oct',this)">Oct</button>
+    <button class="month-tab has-data active" onclick="showMonth('nov',this)">Nov</button>
     <button class="month-tab" onclick="showMonth('dec',this)">Dec</button>
     <button class="month-tab overview-tab" onclick="showMonth('overview',this)">2026 Overview</button>
   </div>
@@ -823,7 +823,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
     </div>
     <div class="insights-card" id="sep-insights"></div>
   </div>
-  <div id="panel-oct" class="month-panel active">
+  <div id="panel-oct" class="month-panel">
     <div class="overview-card">
       <div class="overview-top">
         <div class="overview-left">
@@ -883,7 +883,66 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
       </div>
     </div>
   </div>
-  <div id="panel-nov" class="month-panel"><div class="empty-state"><div class="es-icon">📭</div><h3>November — Not started</h3><p></p></div></div>
+  <div id="panel-nov" class="month-panel active">
+    <div class="overview-card">
+      <div class="overview-top">
+        <div class="overview-left">
+          <div class="ov-label">November 2026 · Core Budget <span style="color:var(--green);font-size:11px;margin-left:8px">🟢 Day 7</span></div>
+          <div class="ov-amount" style="color:var(--green)"><span>SAR</span>0.00</div>
+          <div class="ov-sub">of 7,000 SAR · Cycle: Oct 27 – Nov 26 (31 days)</div>
+        </div>
+        <div class="overview-pills">
+          <div class="pill green"><span class="pill-label">Remaining</span><span class="pill-val">7,000.00 SAR</span></div>
+          <div class="pill green"><span class="pill-label">Daily Power</span><span class="pill-val">225.81 SAR</span></div>
+          <div class="pill"><span class="pill-label">Day</span><span class="pill-val">7 of 31</span></div>
+        </div>
+      </div>
+      <div class="progress-track"><div class="progress-fill green" style="width:0%"></div></div>
+      <div class="progress-labels"><span>SAR 0</span><span class="pct">0% used — fresh start!</span><span>SAR 7,000</span></div>
+    </div>
+    <div class="donuts-grid" id="nov-donuts"></div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" type="text" id="nov-search" placeholder="Search November transactions..." oninput="filterNovTxns()">
+      <span class="search-count" id="nov-search-count"></span>
+    </div>
+    <div class="two-col">
+      <div class="section-card"><div class="section-title">Spending by Category</div><div id="nov-cats"></div></div>
+      <div class="section-card">
+        <div class="section-title">Extra Spending — Not Deducted from Budget</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <span class="extra-badge">⚠️ Isolated</span>
+          <span class="extra-total-val" id="nov-extra-val">SAR 0.00</span>
+        </div>
+        <div id="nov-extra-list"><div style="color:var(--text-muted);font-size:12px;padding:8px 0">No extra spending yet.</div></div>
+      </div>
+    </div>
+    <div class="txn-list-wrap">
+      <div class="txn-list-header">
+        <div class="section-title" style="margin:0">All Transactions</div>
+        <span style="font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace" id="nov-txn-count">0 transactions</span>
+      </div>
+      <div id="nov-txn-list">
+        <div class="live-empty" style="text-align:center;padding:48px 20px;color:var(--text-muted)">
+          <div style="font-size:40px;margin-bottom:12px">📭</div>
+          <h3 style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px">No transactions yet</h3>
+          <p style="font-size:12px">Send your first November receipt to get started.</p>
+        </div>
+      </div>
+      <div class="no-results" id="nov-no-results" style="display:none">No transactions match your search.</div>
+    </div>
+    <div class="insights-card" id="nov-insights">
+      <div class="insights-title">📊 November 2026 — In Progress</div>
+      <div class="insights-summary">
+        <strong>November cycle opens Oct 27 – Nov 26.</strong> Budget: 7,000 SAR · 31 days · Daily target: 225.81 SAR/day.<br><br>
+        <strong>Key actions from October learnings:</strong><br>
+        🥗 Fresh House meal subscription active from Day 5 (Oct 31) — great start<br>
+        ☕ Cap café at 350 SAR/month — Oct ran high<br>
+        ⛽ Fuel budget ~115 SAR/fill — on track<br>
+        💸 Extra gifts isolated correctly — 1,127.87 SAR tracked separately
+      </div>
+    </div>
+  </div>
   <div id="panel-dec" class="month-panel"><div class="empty-state"><div class="es-icon">📭</div><h3>December — Not started</h3><p></p></div></div>
 
   <!-- JULY -->
@@ -996,6 +1055,7 @@ function showMonth(m,el){
   if(m==='jun' && !document.getElementById('jun-donuts').children.length) initJune();
   if(m==='sep' && !document.getElementById('sep-donuts').children.length) initSeptember();
   if(m==='oct') initOctober();
+  if(m==='nov') initNovember();
   if(m==='jan' && !document.getElementById('jan-donuts').children.length) initJanuary();
   if(m==='feb' && !document.getElementById('feb-donuts').children.length) initFebruary();
   if(m==='mar' && !document.getElementById('mar-donuts').children.length) initMarch();
@@ -1314,8 +1374,8 @@ const ALL_MONTHS=[
   {key:'jul',label:'Jul',spent:6496.84,extra:2118.41,active:true,txns:null},
   {key:'aug',label:'Aug',spent:6182.94,extra:4745.3,active:true,cycle:'Jul 27–Aug 26',days:31,avgDay:199.45,pct:88.3,overBudget:false,partial:false},
   {key:'sep',label:'Sep',spent:7569.32,extra:6161.84,active:true,cycle:'Aug 27–Sep 26',days:31,avgDay:244.17,pct:108.1,overBudget:true,partial:false},
-  {key:'oct',label:'Oct',spent:8113.45,extra:4534.92,active:true,cycle:'Sep 27–Oct 26',days:30,avgDay:329.08,pct:115.9,overBudget:true,partial:true},
-  {key:'nov',label:'Nov',spent:0,extra:0,active:false},
+  {key:'oct',label:'Oct',spent:8113.45,extra:4534.92,active:true,cycle:'Sep 27–Oct 26',days:30,avgDay:329.08,pct:115.9,overBudget:true},
+  {key:'nov',label:'Nov',spent:2917.55,extra:1127.87,active:true,cycle:'Oct 27–Nov 26',days:31,avgDay:177.50,pct:41.7,overBudget:false,partial:true},
   {key:'dec',label:'Dec',spent:0,extra:0,active:false},
 ];
 
@@ -3324,7 +3384,7 @@ function buildSepInsights() {
 }
 
 
-window.addEventListener("load", function(){ initOctober(); });
+window.addEventListener("load", function(){ initNovember(); });
 
 // ── OCTOBER DATA ──────────────────────────────────────────
 const octTransactions = [
@@ -3584,6 +3644,180 @@ function buildOctExtraList() {
   if(!eb) return;
   if(octExtra.length===0){eb.innerHTML='<div style="color:var(--text-muted);font-size:12px;padding:8px 0">No extra spending yet.</div>';return;}
   eb.innerHTML=octExtra.map(e=>`<div class="extra-row"><span class="er-name">${e.name} · ${e.note} · ${e.date}</span><span class="er-amount">${fmt(e.amount)}</span></div>`).join('');
+}
+
+// ── NOVEMBER DATA ─────────────────────────────────────────
+const novTransactions = [
+  {date:'2026-10-27',merchant:'Easy Parking',category:'Transport',amount:9.20,note:'',icon:'🚗'},
+  {date:'2026-10-27',merchant:'Mohammed F',category:'Groceries',amount:19.00,note:'Groceries',icon:'🛒'},
+  {date:'2026-10-27',merchant:'Blank Store',category:'Entertainment',amount:50.00,note:'Football & entertainment subscription',icon:'🎮'},
+  {date:'2026-10-28',merchant:'Easy Parking',category:'Transport',amount:16.10,note:'',icon:'🚗'},
+  {date:'2026-10-28',merchant:'Microsoft 365',category:'Subscriptions',amount:43.98,note:'Microsoft 365',icon:'📱'},
+  {date:'2026-10-28',merchant:'HungerStation',category:'Food Delivery',amount:93.00,note:'Cheat meal',icon:'🍱'},
+  {date:'2026-10-29',merchant:'Riyadh Parking',category:'Transport',amount:10.35,note:'',icon:'🚗'},
+  {date:'2026-10-29',merchant:'QAF Group',category:'Café & Drinks',amount:19.00,note:'Morning coffee',icon:'☕'},
+  {date:'2026-10-29',merchant:'Amazon SA',category:'Household',amount:99.75,note:'Home napkins',icon:'🏠'},
+  {date:'2026-10-29',merchant:'Saudi Electricity',category:'Utilities',amount:399.30,note:'Electricity bill',icon:'⚡'},
+  {date:'2026-10-29',merchant:'Zain',category:'Utilities',amount:286.35,note:'Internet subscription',icon:'📡'},
+  {date:'2026-10-29',merchant:'STC',category:'Subscriptions',amount:264.50,note:'Mobile bill',icon:'📱'},
+  {date:'2026-10-29',merchant:'Ngahat Co',category:'Fuel',amount:115.00,note:'Car gas',icon:'⛽'},
+  {date:'2026-10-30',merchant:'Half Milli',category:'Café & Drinks',amount:28.00,note:'Iced hibiscus',icon:'☕'},
+  {date:'2026-10-31',merchant:'Richoux',category:'Dining Out',amount:179.00,note:'Breakfast with wife',icon:'🍽️'},
+  {date:'2026-10-31',merchant:'Fresh House',category:'Food Delivery',amount:734.46,note:'Healthy meals 2 weeks',icon:'🍱'},
+  {date:'2026-10-31',merchant:'HungerStation',category:'Groceries',amount:118.31,note:'Groceries',icon:'🛒'},
+  {date:'2026-10-31',merchant:'Lamst Alward',category:'Personal Care',amount:30.00,note:'Haircut',icon:'✂️'},
+  {date:'2026-10-31',merchant:'HungerStation',category:'Food Delivery',amount:34.50,note:'Cheat meal dinner',icon:'🍱'},
+  {date:'2026-11-01',merchant:'Mohammed F',category:'Groceries',amount:39.50,note:'Groceries',icon:'🛒'},
+  {date:'2026-11-01',merchant:'Wathbah Co',category:'Café & Drinks',amount:42.00,note:'Morning coffee & reading',icon:'☕'},
+  {date:'2026-11-01',merchant:'Amazon For',category:'Household',amount:250.00,note:'Home plants',icon:'🏠'},
+  {date:'2026-11-02',merchant:'Riyadh Parking',category:'Transport',amount:10.35,note:'',icon:'🚗'},
+  {date:'2026-11-02',merchant:'QAF Group',category:'Café & Drinks',amount:19.00,note:'Morning coffee',icon:'☕'},
+  {date:'2026-11-02',merchant:'Riyadh Parking',category:'Transport',amount:6.90,note:'',icon:'🚗'},
+];
+
+const novExtra = [
+  {name:'Strawberry Browser',note:'AI browser subscription',date:'Oct 27',amount:79.87},
+  {name:'Modhlah Co',note:'Coffee with friend',date:'Oct 28',amount:48.00},
+  {name:'Cash (Mom Gift)',note:'Gift for mom',date:'Oct 29',amount:500.00},
+  {name:'Cash (Sister Gift)',note:'Family gift contribution',date:'Oct 29',amount:500.00},
+];
+let novTxnsExpanded = false;
+
+function initNovember() {
+  buildNovOverview(); buildNovDonuts(); buildNovCategories(); buildNovTransactions(); buildNovExtraList();
+}
+
+function buildNovOverview() {
+  const total = novTransactions.reduce((s,t)=>s+t.amount,0);
+  const rem = 7000 - total;
+  const cycleStart = new Date('2026-10-27');
+  const cycleEnd = new Date('2026-11-26');
+  const today = new Date();
+  const dayNum = Math.max(1, Math.min(31, Math.round((today - cycleStart)/86400000) + 1));
+  const daysLeft = Math.max(0, Math.round((cycleEnd - today)/86400000));
+  const pct = total/7000*100;
+  const avgDay = total > 0 ? total / Math.max(1, dayNum - 1 || 1) : 0;
+  const dailyPower = daysLeft > 0 ? rem / daysLeft : rem;
+  const color = pct < 80 ? 'var(--green)' : pct < 100 ? '#fbbf24' : '#f87171';
+  const fillColor = pct < 80 ? 'green' : pct < 100 ? 'yellow' : 'red';
+  const overBudget = total > 7000;
+
+  const amtEl = document.querySelector('#panel-nov .ov-amount');
+  if(amtEl) { amtEl.style.color = color; amtEl.innerHTML = `<span>SAR</span>${fmt(total)}`; }
+
+  const labelEl = document.querySelector('#panel-nov .ov-label');
+  if(labelEl) {
+    const dot = overBudget ? '🔴 Over Budget' : `🟢 Day ${dayNum}`;
+    const dotColor = overBudget ? '#f87171' : 'var(--green)';
+    labelEl.innerHTML = `November 2026 · Core Budget <span style="color:${dotColor};font-size:11px;margin-left:8px">${dot}</span>`;
+  }
+
+  const subEl = document.querySelector('#panel-nov .ov-sub');
+  if(subEl) subEl.textContent = `of 7,000 SAR · Cycle: Oct 27 – Nov 26 (31 days)`;
+
+  const pills = document.querySelectorAll('#panel-nov .pill');
+  if(pills.length >= 3) {
+    pills[0].querySelector('.pill-val').textContent = fmt(Math.abs(rem)) + (rem < 0 ? ' SAR over' : ' SAR');
+    pills[0].className = 'pill ' + (rem >= 0 ? 'green' : 'red');
+    pills[1].querySelector('.pill-val').textContent = fmt(dailyPower) + ' SAR';
+    pills[1].className = 'pill ' + (dailyPower > 280 ? 'yellow' : 'green');
+    pills[2].querySelector('.pill-val').textContent = `${dayNum} of 31`;
+  }
+
+  const fill = document.querySelector('#panel-nov .progress-fill');
+  if(fill) { fill.style.width = Math.min(pct,100)+'%'; fill.className = 'progress-fill '+fillColor; }
+
+  const pctLabel = document.querySelector('#panel-nov .pct');
+  if(pctLabel) {
+    if(overBudget) pctLabel.innerHTML = `<span style="color:#f87171">${pct.toFixed(1)}% — Over by ${fmt(total-7000)} SAR</span>`;
+    else pctLabel.textContent = `${pct.toFixed(1)}% used`;
+  }
+}
+
+function buildNovDonuts() {
+  const total = novTransactions.reduce((s,t)=>s+t.amount,0);
+  const rem = 7000 - total;
+  const cycleStart = new Date('2026-10-27');
+  const cycleEnd = new Date('2026-11-26');
+  const today = new Date();
+  const dayNum = Math.max(1, Math.round((today - cycleStart)/86400000));
+  const daysLeft = Math.max(0, Math.round((cycleEnd - today)/86400000));
+  const r=36, circ=2*Math.PI*r;
+  const pct = total/7000*100;
+  const col = pct<80?'#34d399':pct<95?'#fbbf24':'#f87171';
+  const ds=[
+    {label:'Budget Used',val:pct.toFixed(1)+'%',sub:fmt(total)+' SAR',color:col,pct:Math.min(pct,100)},
+    {label:'Remaining',val:fmt(rem),sub:'SAR remaining',color:'#34d399',pct:Math.max(0,rem/7000*100)},
+    {label:'Daily Power',val:daysLeft>0?fmt(rem/daysLeft):'—',sub:'SAR per day left',color:'#fbbf24',pct:50},
+    {label:'Transactions',val:novTransactions.length,sub:'core entries',color:'#4f8ef7',pct:Math.min(novTransactions.length/50*100,100)},
+  ];
+  document.getElementById('nov-donuts').innerHTML=ds.map(d=>{
+    const off=circ-(Math.min(d.pct,100)/100)*circ;
+    return `<div class="donut-card"><div class="donut-label">${d.label}</div>
+      <div class="donut-wrap"><svg width="86" height="86" viewBox="0 0 90 90">
+        <circle class="donut-bg" cx="45" cy="45" r="${r}"/>
+        <circle class="donut-fill" cx="45" cy="45" r="${r}" stroke="${d.color}" stroke-dasharray="${circ}" stroke-dashoffset="${off}"/>
+      </svg><div class="donut-center"><div class="donut-val" style="color:${d.color}">${d.val}</div><div class="donut-unit">·</div></div></div>
+      <div class="donut-sub">${d.sub}</div></div>`;
+  }).join('');
+}
+
+function buildNovCategories() {
+  const tot={};
+  novTransactions.forEach(t=>tot[t.category]=(tot[t.category]||0)+t.amount);
+  if(Object.keys(tot).length===0){
+    document.getElementById('nov-cats').innerHTML='<div style="color:var(--text-muted);font-size:12px;padding:8px 0">No transactions yet.</div>';
+    return;
+  }
+  const grand=Object.values(tot).reduce((a,b)=>a+b,0);
+  const allCfg=Object.assign({},catConfig,junCatConfig,{'Meal Subscription':{color:'#10b981',bg:'rgba(16,185,129,0.12)'},'Entertainment':{color:'#a78bfa',bg:'rgba(167,139,250,0.12)'}});
+  const icons=Object.assign({},catIcons,{'Utilities':'⚡','Meal Subscription':'🥗','Entertainment':'🎮','Fuel':'⛽'});
+  document.getElementById('nov-cats').innerHTML=Object.entries(tot).sort((a,b)=>b[1]-a[1]).map(([c,amt])=>{
+    const cfg=allCfg[c]||{color:'#8b949e',bg:'rgba(139,148,158,0.12)'};
+    return `<div class="cat-row"><div class="cat-icon-wrap" style="background:${cfg.bg}">${icons[c]||'📦'}</div>
+      <div class="cat-info"><div class="cat-name">${c}</div>
+        <div class="cat-bar-wrap"><div class="cat-bar" style="width:${(amt/grand*100).toFixed(1)}%;background:${cfg.color}"></div></div>
+      </div><div class="cat-right"><div class="cat-amount">${fmt(amt)}</div><div class="cat-pct">${(amt/7000*100).toFixed(1)}%</div></div></div>`;
+  }).join('');
+}
+
+function buildNovTransactions() {
+  const reversed=[...novTransactions].reverse();
+  document.getElementById('nov-txn-count').textContent=reversed.length+' transactions';
+  if(reversed.length===0) return;
+  const allCfg=Object.assign({},catConfig,junCatConfig,{'Meal Subscription':{color:'#10b981',bg:'rgba(16,185,129,0.12)'},'Entertainment':{color:'#a78bfa',bg:'rgba(167,139,250,0.12)'}});
+  document.getElementById('nov-txn-list').innerHTML=reversed.map((t,i)=>{
+    const cfg=allCfg[t.category]||{color:'#8b949e',bg:'rgba(139,148,158,0.12)'};
+    const d=new Date(t.date);
+    const ds=d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+    const collapsed=i>=5?'collapsed':'';
+    return `<div class="txn-item ${collapsed}" data-search="${(t.merchant+' '+t.category+' '+t.amount+' '+(t.note||'')+' '+t.date).toLowerCase()}">
+      <div class="txn-icon-wrap" style="background:${cfg.bg}">${t.icon}</div>
+      <div class="txn-info"><div class="txn-merchant">${t.merchant}</div>
+        <div class="txn-meta">${t.category}</div>${t.note?`<div class="txn-note">${t.note}</div>`:''}
+      </div><div class="txn-amount" style="color:${cfg.color}">${fmt(t.amount)}</div>
+      <div class="txn-date">${ds}</div></div>`;
+  }).join('');
+}
+
+function filterNovTxns() {
+  const q=document.getElementById('nov-search').value.toLowerCase().trim();
+  const items=document.querySelectorAll('#nov-txn-list .txn-item');
+  let vis=0;
+  if(q){items.forEach(el=>{el.classList.remove('collapsed');const m=el.dataset.search.includes(q);el.classList.toggle('hidden',!m);if(m)vis++;});}
+  else{items.forEach((el,i)=>{el.classList.remove('hidden');if(i>=5&&!novTxnsExpanded)el.classList.add('collapsed');vis++;});}
+  document.getElementById('nov-search-count').textContent=q?vis+' results':'';
+  document.getElementById('nov-no-results').style.display=(q&&vis===0)?'block':'none';
+}
+
+function buildNovExtraList() {
+  const extraTotal=novExtra.reduce((s,e)=>s+e.amount,0);
+  const etv=document.getElementById('nov-extra-val');
+  if(etv) etv.textContent='SAR '+fmt(extraTotal);
+  const eb=document.getElementById('nov-extra-list');
+  if(!eb) return;
+  if(novExtra.length===0){eb.innerHTML='<div style="color:var(--text-muted);font-size:12px;padding:8px 0">No extra spending yet.</div>';return;}
+  eb.innerHTML=novExtra.map(e=>`<div class="extra-row"><span class="er-name">${e.name} · ${e.note} · ${e.date}</span><span class="er-amount">${fmt(e.amount)}</span></div>`).join('');
 }
 
 </script>
